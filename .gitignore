@@ -1,1 +1,7 @@
 # Place the unwanted templates, log files, etc. here to avoid pushing it to the github repository.
+
+# Npm log files
+npm-debug.log
+
+#Node modules files
+node_modules
