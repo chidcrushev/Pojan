@@ -8,13 +8,13 @@ This repository is created for the team project to build a web application porta
 <ol>
     <li> HTML5</li>
     <li> CSS3</li>
-    <li>3. JavaScript</li>
-    <li>4. Material.io</li>
-    <li>5. Socket.io</li>
-    <li>6. Express</li>
-    <li>7. MySQL</li>
-    <li>8. Node js</li>
-    <li>9. Twilio Messaging API</li>
+    <li> JavaScript</li>
+    <li> Material.io</li>
+    <li> Socket.io</li>
+    <li> Express</li>
+    <li> MySQL</li>
+    <li> Node js</li>
+    <li> Twilio Messaging API</li>
 </ol>
 
 ## Installation Guide
