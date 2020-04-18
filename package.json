@@ -1,0 +1,27 @@
+{
+  "name": "assistantshipjobportal",
+  "version": "1.0.0",
+  "description": "A web application to help the students to explore TA, RA, GA opportunites offered by the university departments at NMSU",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chidcrushev/finalProject.git"
+  },
+  "keywords": [
+    "webapplication"
+  ],
+  "author": "Chidambaram Crushev, Valentine Aduaka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chidcrushev/finalProject/issues"
+  },
+  "homepage": "https://github.com/chidcrushev/finalProject#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "twilio": "^3.42.2"
+  }
+}
