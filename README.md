@@ -25,5 +25,5 @@ npm install
 ```
 3. Start the server
 ```
-node server/index.js
+npm start
 ```
