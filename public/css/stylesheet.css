@@ -1,0 +1,42 @@
+body{
+    background-color: #eeeeee;
+    font-family: Lato;
+    font-weight: 300;
+}
+
+.bg-template{
+    background-image: linear-gradient(rgba(255, 82, 182, 0.678), rgba(206, 0, 0, 0.562)), url(../img/learning.jpg);
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 50%;
+}
+
+.signin-box{
+    margin: 10vh auto 0 auto;
+    width: 470px;
+    height: 100%;
+}
+
+.signin-box .card-action a{
+    display: inline-block;
+    font-size: 14px;
+}
+
+.material-icons{
+  color: #cfd8dc   !important;
+}
+
+.material-icons.active {
+  color: #cc3f3d !important;
+}
+
+input[type=email]:focus,input[type=password]:focus,input[type=text]:focus,input[type=password]:focus {
+ border-bottom: 1px solid #ff5252  !important;
+ box-shadow: 0 1px 0 0 #ff5252  !important;
+}
+
