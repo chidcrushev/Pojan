@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Material Icons. If there is a requirement, we can import this.  -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/normalize.css">
     <!--Importing materialize.css library, Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection">
@@ -18,7 +19,7 @@
 <body> 
   <div class="bg-template red accent-2"></div>
     <div class="container">
-      <div class="valign-wrapper row signin-box">
+      <div class="valign-wrapper row signup-box">
         <div class="col card hoverable s12 white z-depth-3">
           <form class="col s12">
             <div class="card-content">
@@ -28,18 +29,18 @@
                     </a>
                 </div>
                 
-                <h4 class="center-align grey-text text-darken-2">Sign Up</h4>
+                <h5 class="center-align grey-text text-darken-2">Sign Up</h5>
 
                 <div class="row">
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="first_name" type="text" class="validate">
+                            <input id="first_name" type="text" class="validate" autocomplete="off">
                             <label for="first_name" class="red-text accent-2">First Name</label>
                         </div>
                         <div class="input-field col s6">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="last_name" type="text" class="validate">
+                            <input id="last_name" type="text" class="validate" autocomplete="off">
                             <label for="last_name" class="red-text accent-2">Last Name</label>
                         </div>
                     </div>
@@ -47,7 +48,7 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
-                            <input id="email" type="email" class="validate">
+                            <input id="email" type="email" class="validate" autocomplete="off">
                             <label for="email" class="red-text accent-2">Email</label>
                         </div>
                     </div>
@@ -67,7 +68,7 @@
                 </div>
 
                 <div class="row center">
-                    <button class="btn btn-large waves-effect waves-light red accent-2" type="submit" name="action">SIGN UP</button>
+                    <button class="btn btn-small waves-effect waves-light red accent-2" type="submit" name="action">SIGN UP</button>
                 </div>
             </div> 
           </form>
