@@ -2,6 +2,9 @@
  * @author Chidambaram Crushev, Valentine Aduaka
 */
 
+// Instantiate socket.io
+let socket = io();
+
 document.addEventListener('DOMContentLoaded', function() {
     let side_nav = document.querySelectorAll('.sidenav');
     let side_nav_instance = M.Sidenav.init(side_nav, {});
@@ -18,18 +21,32 @@ document.addEventListener('DOMContentLoaded', function() {
         "Computer Science": null,
         "Astronomy": null,
         "Chemical Engineering": 'https://placehold.it/250x250'
-    }});
+        }
+        });
 
-    let dropdown = document.querySelectorAll('.dropdown-trigger');
-    let dropdown_instance = M.Dropdown.init(dropdown, {});
+        let dropdown = document.querySelectorAll('.dropdown-trigger');
+        let dropdown_instance = M.Dropdown.init(dropdown, {});
+        document.querySelector(".navbar-dropdown").onclick = function () {
+          document.querySelector(".top-bar-nav").classList.toggle("show-nav");
+        };
 
+        //Password and confirm password validation
+        let password = document.getElementById("password")
+        let confirmPassword = document.getElementById("confirm_password");
 
-    document.querySelector(".navbar-dropdown").onclick = function(){
-        document.querySelector(".top-bar-nav").classList.toggle("show-nav");
-    };
+        function validatePassword() {
+          if (password.value != confirmPassword.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+          } else {
+            confirm_password.setCustomValidity('');
+          }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
 
 });
 
-// Instantiate socket.io
-let socket = io();
+
+
 
