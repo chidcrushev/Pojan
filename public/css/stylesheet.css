@@ -156,6 +156,10 @@ input[type=email]:focus,input[type=password]:focus,input[type=text]:focus,textar
  box-shadow: 0 1px 0 0 #ff5252  !important;
 }
 
+.error {
+  padding: 10px;
+  text-align: center;
+}
 [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
     background-color: #ff5252;
 }

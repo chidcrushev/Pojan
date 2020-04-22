@@ -17,36 +17,26 @@
 </head>
 
 <body> 
-  <div class="bg-template red accent-2"></div>
+    <div class="bg-template red accent-2"></div>
     <main class="center-pane">
         <div class="container">
             <div class="row signin-box">
                 <div class="col card s12 white z-depth-1">
-                    <form class="col s12" action="index.html">
+                    <a href="/signin" class="close-pane-icon"><i class="material-icons">close</i></a>
+                    <form class="col s12">
                         <div class="card-content">
-                            <h5 class="center-align text-darken-2">Sign In</h5>
-    
+                            <h5 class="center-align grey-text text-darken-2">Reset Password</h5>
+                            <p class="center-align">A password reset link will be sent to your email.</p>
+
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <i class="material-icons prefix">account_circle</i>
                                     <input id="email" type="email" class="validate" autocomplete="off">
-                                    <label for="email" class="red-text accent-2">Email</label>
-                                </div>
-    
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">lock_open</i>
-                                    <input id="password" type="password" class="validate">
-                                    <label for="password" class="red-text accent-2">Password</label>
+                                    <label for="email" class="red-text accent-2">What's your email?</label>
                                 </div>
                             </div>
-    
+
                             <div class="row center">
-                                <div class="col s12 l6 left-align"><a href="reset.html" class="grey-text text-darken-4">Forgot password?</a></div>
-                                <div class="col s12 l6 right-align"><a href="signup.html" class="grey-text text-darken-4">Not a member yet?</a></div>
-                            </div>
-    
-                            <div class="row center">
-                                <button class="btn waves-effect waves-light red accent-2" type="submit" name="action">SIGN IN</button>
+                                <button class="btn waves-effect waves-light red accent-2" type="submit" name="action">RESET</button>
                             </div>
                         </div>
                     </form>
@@ -54,7 +44,7 @@
             </div>
         </div>
     </main>
-    
+
     <!-- Footer -->
     <footer class="row footer-container">
         <div class="container footer-pane">
