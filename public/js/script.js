@@ -18,7 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
         "Computer Science": null,
         "Astronomy": null,
         "Chemical Engineering": 'https://placehold.it/250x250'
-      }});
+    }});
+
+    let dropdown = document.querySelectorAll('.dropdown-trigger');
+    let dropdown_instance = M.Dropdown.init(dropdown, {});
+
+
+    document.querySelector(".navbar-dropdown").onclick = function(){
+        document.querySelector(".top-bar-nav").classList.toggle("show-nav");
+    };
 
 });
 

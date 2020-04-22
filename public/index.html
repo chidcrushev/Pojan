@@ -23,15 +23,21 @@
     <div class="navbar-fixed">
       <nav class="navbar white">
         <div class="nav-wrapper">
-          <a href="#!" class="brand-logo grey-text text-darken-4"></a>
+          <a href="#!" class="brand-logo center grey-text">POJAN</a>
           <ul id="nav-mobile" class="right">
-            <li class="hide-on-med-and-down"><a href="#!" data-target="dropdown1" class="dropdown-trigger waves-effect"><i class="material-icons black-text">notifications</i></a></li>
-            <li><a href="#!" data-target="chat-dropdown" class="dropdown-trigger waves-effect"><i class="material-icons black-text">settings</i></a></li>
+            <li class="hide-on-med-and-down"><a href="#!" class="waves-effect navbar-dropdown"><i class="material-icons">account_circle</i></a></li>
           </ul>
-          <a href="#!" data-target="sidenav-left" class="sidenav-trigger left"><i class="material-icons black-text">menu</i></a>
+          <a href="#!" data-target="sidenav-left" class="sidenav-trigger left show-on-large waves-effect"><i class="material-icons">menu</i></a>
         </div>
       </nav>
     </div>
+
+    <ul class="top-bar-nav row card">
+      <li><a href="profile.html" class="waves-effect"><i class="material-icons">account_box</i>Profile</a></li>
+      <li><a href="#!" class="waves-effect"><i class="material-icons">notifications_active</i>Notifications</a></li>
+      <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Settings</a></li>
+      <li><a href="signin.html" class="waves-effect"><i class="material-icons">cloud_off</i>Sign Out</a></li>
+    </ul>
 
     <ul id="sidenav-left" class="sidenav sidenav-fixed" style="transform: translateX(0%);">
       <li>
@@ -44,7 +50,7 @@
           <a href="#email"><span class="white-text email">vaduaka@nmsu.edu</span></a>
         </div>
       </li>
-      <li><a href="index.html"><i class="material-icons">art_track</i>Postings</a></li>
+      <li class="active"><a href="index.html"><i class="material-icons">art_track</i>Postings</a></li>
       <li><a class="subheader">Account</a></li>
       <li><a href="profile.html"><i class="material-icons">account_box</i>Profile</a></li>
       <li><a href="#!"><i class="material-icons">notifications_active</i>Notifications</a></li>
@@ -61,7 +67,7 @@
   </header>
 
   <main>
-    <div class="container">
+    <div class="container section">
       <div class="row card-posts">
         <div class="col s12">
           <div class="card sticky-action">
@@ -81,7 +87,7 @@
             <div class="card-action">              
               <span><i class="material-icons">group</i> 12 </span>
               <span><i class="material-icons">visibility</i> 24</span>
-              <a href="#" class="btn btn-small right red accent-2 waves-effect">Apply</a>
+              <a href="apply.html" class="btn btn-small right red accent-2 waves-effect">Apply</a>
             </div>
           </div>
         </div>
@@ -104,7 +110,7 @@
             <div class="card-action">              
               <span><i class="material-icons">group</i> 5 </span>
               <span><i class="material-icons">visibility</i> 9</span>
-              <a href="#" class="btn btn-small right red accent-2 waves-effect">Apply</a>
+              <a href="apply.html" class="btn btn-small right red accent-2 waves-effect">Apply</a>
             </div>
           </div>
         </div>
@@ -127,7 +133,7 @@
             <div class="card-action">              
               <span><i class="material-icons">group</i> 3 </span>
               <span><i class="material-icons">visibility</i> 7</span>
-              <a href="#" class="btn btn-small right red accent-2 disabled">Apply</a>
+              <a href="apply.html" class="btn btn-small right red accent-2 disabled">Apply</a>
             </div>
           </div>
         </div>
@@ -135,6 +141,7 @@
 
       <!-- Modal Structure -->
       <div id="modal1" class="modal bottom-sheet modal-fixed-footer loader-container">
+        
         <div class="preloader-wrapper active loader">
           <div class="spinner-layer spinner-red-only">
             <div class="circle-clipper left">
@@ -147,6 +154,7 @@
           </div>
         </div>
         <div class="modal-content">
+          <a href="#" class="modal-close  right"><i class="material-icons">close</i></a>
           <h4>ICT - NETWORK ADMIN</h4>
           <ul class="card-breadcrumb">
             <li><i class="material-icons green-text accent-4 ">lens</i><span></span></li>
@@ -200,7 +208,7 @@
         </div>
         <div class="modal-footer">
           <!-- <a href="#!" class="modal-close waves-effect waves-red red accent-2 btn">APPLY</a> -->
-          <a href="#!" class="waves-effect waves-red red accent-2 btn">APPLY</a>
+          <a href="apply.html" class="waves-effect waves-red red accent-2 btn">APPLY</a>
         </div>
       </div>
 
