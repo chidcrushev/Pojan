@@ -1,0 +1,236 @@
+<!-- /**
+ * @author Chidambaram Crushev, Valentine Aduaka
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>NMSU assistantship portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Material Icons. If there is a requirement, we can import this.  -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <!--Importing materialize.css library, Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+
+<body class="has-fixed-sidenav"> 
+  <header>
+    <div class="navbar-fixed">
+      <nav class="navbar white">
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo center grey-text">POJAN</a>
+          <ul id="nav-mobile" class="right">
+            <li class="hide-on-med-and-down"><a href="#!" class="waves-effect navbar-dropdown"><i class="material-icons">account_circle</i></a></li>
+          </ul>
+          <a href="#!" data-target="sidenav-left" class="sidenav-trigger left show-on-large waves-effect"><i class="material-icons">menu</i></a>
+        </div>
+      </nav>
+    </div>
+
+    <ul class="top-bar-nav row card">
+      <li><a href="profile.html" class="waves-effect"><i class="material-icons">account_box</i>Profile</a></li>
+      <li><a href="#!" class="waves-effect"><i class="material-icons">notifications_active</i>Notifications</a></li>
+      <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Settings</a></li>
+      <li><a href="signin.html" class="waves-effect"><i class="material-icons">cloud_off</i>Sign Out</a></li>
+    </ul>
+
+    <ul id="sidenav-left" class="sidenav sidenav-fixed" style="transform: translateX(0%);">
+      <li>
+        <div class="user-view">
+          <div class="background">
+            <img src="img/triangles.png">
+          </div>
+          <a href="#user"><img class="circle" src="img/avatar.png"></a>
+          <a href="#name"><span class="white-text name">Valentine Aduaka</span></a>
+          <a href="#email"><span class="white-text email">vaduaka@nmsu.edu</span></a>
+        </div>
+      </li>
+      <li class="active"><a href="index.html"><i class="material-icons">art_track</i>Postings</a></li>
+      <li><a class="subheader">Account</a></li>
+      <li><a href="profile.html"><i class="material-icons">account_box</i>Profile</a></li>
+      <li><a href="#!"><i class="material-icons">notifications_active</i>Notifications</a></li>
+      <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+      
+      <li><a class="subheader">Manage Postings</a></li>
+      <li><a href="create.html"><i class="material-icons">note_add</i>Create Post</a></li>
+      <!-- <li><a class="subheader">Subheader</a></li> -->
+      
+
+      <li><div class="divider"></div></li>
+      <li><a href="signin.html"><i class="material-icons">cloud_off</i>Sign Out</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <div class="container section">
+      <div class="row card-posts">
+        <div class="col s12">
+          <div class="card sticky-action">
+            <div class="card-content">
+              <a class="modal-trigger grey-text text-darken-4" href="#modal1"><span class="card-title">DATA SCIENCE & ML <i class="material-icons right">more_vert</i></a></span>
+              <ul class="card-breadcrumb">
+                <li><i class="material-icons green-text accent-4 ">lens</i><span></span></li>
+                <li><span>RESEARCH ASSISTANT</span></li>
+                <li><span>OTA</span></li>
+                <li><i class="material-icons">access_time</i><span>a minute ago</span></li>
+              </ul>
+              <p>
+                I am a very simple card. I am good at containing small bits of information. 
+                I am convenient because I require little markup to use effectively.
+              </p>
+            </div>
+            <div class="card-action">              
+              <span><i class="material-icons">group</i> 12 </span>
+              <span><i class="material-icons">visibility</i> 24</span>
+              <a href="apply.html" class="btn btn-small right red accent-2 waves-effect">Apply</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col s12">
+          <div class="card sticky-action">
+            <div class="card-content">
+              <a class="modal-trigger grey-text text-darken-4" href="#modal1"><span class="card-title">ICT - NETWORK ADMIN <i class="material-icons right">more_vert</i></a></span>
+              <ul class="card-breadcrumb">
+                <li><i class="material-icons green-text accent-4 ">lens</i><span></span></li>
+                <li><span>GRADUATE ASSISTANT</span></li>
+                <li><span>OTA</span></li>
+                <li><i class="material-icons">access_time</i><span>a minute ago</span></li>
+              </ul>
+              <p>
+                I am a very simple card. I am good at containing small bits of information. 
+                I am convenient because I require little markup to use effectively.
+              </p>
+            </div>
+            <div class="card-action">              
+              <span><i class="material-icons">group</i> 5 </span>
+              <span><i class="material-icons">visibility</i> 9</span>
+              <a href="apply.html" class="btn btn-small right red accent-2 waves-effect">Apply</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col s12">
+          <div class="card sticky-action">
+            <div class="card-content">
+              <a class="modal-trigger grey-text text-darken-4" href="#modal1"><span class="card-title">CS 479 - SPECIAL TOPICS <i class="material-icons right">more_vert</i></a></span>
+              <ul class="card-breadcrumb">
+                <li><i class="material-icons red-text accent-4">lens</i><span></span></li>
+                <li><span>TEACHING ASSISTANT</span></li>
+                <li><span>OTA</span></li>
+                <li><i class="material-icons">access_time</i><span>a month ago</span></li>
+              </ul>
+              <p>
+                I am a very simple card. I am good at containing small bits of information. 
+                I am convenient because I require little markup to use effectively.
+              </p>
+            </div>
+            <div class="card-action">              
+              <span><i class="material-icons">group</i> 3 </span>
+              <span><i class="material-icons">visibility</i> 7</span>
+              <a href="apply.html" class="btn btn-small right red accent-2 disabled">Apply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal bottom-sheet modal-fixed-footer loader-container">
+        
+        <div class="preloader-wrapper active loader">
+          <div class="spinner-layer spinner-red-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-content">
+          <a href="#" class="modal-close  right"><i class="material-icons">close</i></a>
+          <h4>ICT - NETWORK ADMIN</h4>
+          <ul class="card-breadcrumb">
+            <li><i class="material-icons green-text accent-4 ">lens</i><span></span></li>
+            <li><span>GRADUATE ASSISTANT</span></li>
+            <li><span>OTA</span></li>
+            <li><i class="material-icons">access_time</i><span>a minute ago</span></li>
+          </ul>
+
+          <div class="row">
+            <h6>Description</h6>
+            <p>
+              I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.
+              I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.
+            </p>
+          </div>
+          
+          
+          <div class="row">
+            <h6>Requirement</h6>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci minima necessitatibus ullam suscipit modi aut, corrupti alias illum hic recusandae accusamus, nostrum iste explicabo architecto provident. Esse quos asperiores alias. </p>
+          </div>
+
+          <div class="row">
+            <h6>Department Info</h6>
+            <div class="row">
+              <div class="chip">
+                <i class="material-icons">school</i>
+                Computer Science
+              </div>
+              <div class="chip">
+                <i class="material-icons">person_outline</i>
+                Kelvin Clara
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <h6>Stats</h6>
+            <div class="row">
+              <div class="chip">
+                <i class="material-icons">group</i>
+                5 applicants
+              </div>
+              
+              <div class="chip">
+                <i class="material-icons">visibility</i>
+                9 views
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <a href="#!" class="modal-close waves-effect waves-red red accent-2 btn">APPLY</a> -->
+          <a href="apply.html" class="waves-effect waves-red red accent-2 btn">APPLY</a>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <ul class="pagination right">
+        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <li class="active red accent-2"><a href="#!">1</a></li>
+        <li class="waves-effect"><a href="#!">2</a></li>
+        <li class="waves-effect"><a href="#!">3</a></li>
+        <li class="waves-effect"><a href="#!">4</a></li>
+        <li class="waves-effect"><a href="#!">5</a></li>
+        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+      </ul>
+    </div>
+  </main>
+  
+  <!-- Importing materialize.css library -->
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+  <script src="/socket.io/socket.io.js"></script>  
+  <script src="js/script.js"></script>
+  
+</body>
+</html>

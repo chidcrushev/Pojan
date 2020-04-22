@@ -1,0 +1,200 @@
+<!-- /**
+ * @author Chidambaram Crushev, Valentine Aduaka
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>NMSU assistantship portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Material Icons. If there is a requirement, we can import this.  -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <!--Importing materialize.css library, Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">
+</head>
+
+<body class="has-fixed-sidenav"> 
+  <header>
+    <div class="navbar-fixed">
+        <nav class="navbar white">
+          <div class="nav-wrapper">
+            <a href="#!" class="brand-logo center grey-text">POJAN</a>
+            <ul id="nav-mobile" class="right">
+              <li class="hide-on-med-and-down"><a href="#!" class="waves-effect navbar-dropdown"><i class="material-icons">account_circle</i></a></li>
+            </ul>
+            <a href="#!" data-target="sidenav-left" class="sidenav-trigger left show-on-large waves-effect"><i class="material-icons">menu</i></a>
+          </div>
+        </nav>
+    </div>
+  
+    <ul class="top-bar-nav row card">
+        <li><a href="profile.html" class="waves-effect"><i class="material-icons">account_box</i>Profile</a></li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">notifications_active</i>Notifications</a></li>
+        <li><a href="#!" class="waves-effect"><i class="material-icons">settings</i>Settings</a></li>
+        <li><a href="signin.html" class="waves-effect"><i class="material-icons">cloud_off</i>Sign Out</a></li>
+    </ul>
+
+    <ul id="sidenav-left" class="sidenav sidenav-fixed" style="transform: translateX(0%);">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="img/triangles.png">
+            </div>
+            <a href="#user"><img class="circle" src="img/avatar.png"></a>
+            <a href="#name"><span class="white-text name">Valentine Aduaka</span></a>
+            <a href="#email"><span class="white-text email">vaduaka@nmsu.edu</span></a>
+          </div>
+        </li>
+        <li><a href="index.html"><i class="material-icons">art_track</i>Postings</a></li>
+        <li><a class="subheader">Account</a></li>
+        <li><a href="profile.html"><i class="material-icons">account_box</i>Profile</a></li>
+        <li><a href="#!"><i class="material-icons">notifications_active</i>Notifications</a></li>
+        <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
+        
+        <li><a class="subheader">Manage Postings</a></li>
+        <li class="active"><a href="create.html"><i class="material-icons">note_add</i>Create Post</a></li>
+        <!-- <li><a class="subheader">Subheader</a></li> -->
+        
+
+        <li><div class="divider"></div></li>
+        <li><a href="signin.html"><i class="material-icons">cloud_off</i>Sign Out</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <div class="container section">
+        <form action="index.html">
+            <div class="row">
+                <div class="col s12 m12 l8">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">
+                                <h5>CREATE A NEW POST</h5>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="title" type="text" class="validate">
+                                    <label for="title">Job Title</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <textarea id="description" class="materialize-textarea"></textarea>
+                                    <label for="description">Job Description</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <textarea id="requirement" class="materialize-textarea"></textarea>
+                                    <label for="requirement">Requirements</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <select>
+                                      <option value="" disabled selected>Choose your option</option>
+                                      <option value="1">Graduate</option>
+                                      <option value="2">Research</option>
+                                      <option value="3">Teaching</option>
+                                    </select>
+                                    <label>Assistantship Type</label>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <div class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <!-- <i class="material-icons prefix">textsms</i> -->
+                                            <input type="text" id="autocomplete-input" class="autocomplete" autocomplete="off">
+                                            <label for="autocomplete-input">Select Department</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l4">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col s12">
+                                    <h6>Strict Requisite</h6>
+                                    <div class="row section">
+                                        <div class="col s6 m4">
+                                            <label>
+                                                <input class="with-gap" name="group1" type="radio" checked />
+                                                <span>CTA</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="col s6 m4">
+                                            <label>
+                                                <input class="with-gap" name="group1" type="radio"/>
+                                                <span>OTA</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="col s12">
+                                    <h6>Notification</h6>
+                                    <div class="row section">
+                                        <div class="col s4 l4">
+                                            <label>
+                                                <input type="checkbox" class="filled-in" checked="checked" />
+                                                <span>Email</span>
+                                            </label>
+                                        </div>
+                                        <div class="col s4 l4">
+                                            <label>
+                                                <input type="checkbox" class="filled-in" checked="checked" />
+                                                <span>Push</span>
+                                            </label>
+                                        </div>
+                                        <div class="col s4 l4">
+                                            <label>
+                                                <input type="checkbox" class="filled-in"/>
+                                                <span>SMS</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <h5>Terms &amp; Conditions</h5>
+                            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>I agree to the terms &amp; conditions</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col s12">
+                            <button class="btn waves-effect waves-light red accent-2" type="submit" name="action">CREATE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+  </main>
+  
+  <!-- Importing materialize.css library -->
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+  <script src="/socket.io/socket.io.js"></script>  
+  <script src="js/script.js"></script>
+  
+</body>
+</html>

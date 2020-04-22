@@ -1,0 +1,60 @@
+# Place the unwanted templates, log files, etc. here to avoid pushing it to the github repository.
+
+#Node modules files
+node_modules
+
+#Build files
+build/
+reports/
+
+#npm cache files
+.npm
+
+#Environment files-macOS
+.env
+.DS_Store
+
+#Windows files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+#Files
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.seed
+*.gz
+*.tgz
+
+# Npm log files
+logs
+npm-debug.log
+yarn-debug.log*
+yarn-error.log*
+
+#Directories
+lib-cov
+.nyc_output
+
+#Temporary folders
+tmp/
+temp/
+
+#cache files
+*.cache
+
+#Visual studio code
+.settings/
+.vscode/
+.vscode-test
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
