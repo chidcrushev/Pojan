@@ -24,8 +24,7 @@ const hbs  = require('express-handlebars');
 // const twilio    = require('twilio')(account,authToken);
 
 //Static folder
-const projectDirectory = path.join(__dirname, 'public');
-app.use(express.static(projectDirectory));
+app.use( express.static(path.join(__dirname, 'public'), {extensions: ['html', 'htm']}) );
 
 //View engine setup
 app.engine('hbs', hbs({

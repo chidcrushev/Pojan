@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Material Icons. If there is a requirement, we can import this.  -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/normalize.css">
     <!--Importing materialize.css library, Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" media="screen,projection">
@@ -17,57 +18,59 @@
 
 <body> 
   <div class="bg-template red accent-2"></div>
-    <div class="container">
-      <div class="valign-wrapper row signin-box">
-        <div class="col card hoverable s12 white z-depth-3">
-          <form class="col s12" action="/login" method ="POST">
-            <div class="card-content">
-              
-              {{!-- Login Error Message. --}}
-              {{#if message}}
-              <div class="error">
-                {{message}}
-              </div>
-              {{/if}}
-
-                <h5 class="center-align text-darken-2">Sign In</h5>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">account_circle</i>
-                        <input id="email" type="email" class="validate" autocomplete="off" name="email" required/>
-                        <label for="email" class="red-text accent-2">Email</label>
-                    </div>
-
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">lock_open</i>
-                        <input id="password" type="password" class="validate" name="password" required/>
-                        <label for="password" class="red-text accent-2">Password</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s6"><a href="/reset" class="grey-text text-darken-4">Forgot password?</a></div>
-                    <div class="col s6 right-align"><a href="/signup" class="grey-text text-darken-4">Not a member yet?</a></div>
-                </div>
-
-                <div class="row center">
-                    <button class="btn btn-large waves-effect waves-light red accent-2" type="submit" name="action">SIGN IN</button>
+    <main class="center-pane">
+        <div class="container">
+            <div class="row signin-box">
+                <div class="col card s12 white z-depth-1">
+                    <form class="col s12" action="/login" method="POST">
+                        <div class="card-content">
+                        
+                            {{!-- Login Error Message. --}}
+                            {{#if message}}
+                            <div class="error">
+                                {{message}}
+                            </div>
+                            {{/if}}
+                            <h5 class="center-align text-darken-2">Sign In</h5>
+    
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input id="email" type="email" class="validate" autocomplete="off" name="email" required/>
+                                    <label for="email" class="red-text accent-2">Email</label>
+                                </div>
+    
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">lock_open</i>
+                                    <input id="password" type="password" class="validate" name="password" required/>
+                                    <label for="password" class="red-text accent-2">Password</label>
+                                </div>
+                            </div>
+    
+                            <div class="row center">
+                                <div class="col s12 l6 left-align"><a href="/reset" class="grey-text text-darken-4">Forgot password?</a></div>
+                                <div class="col s12 l6 right-align"><a href="/signup" class="grey-text text-darken-4">Not a member yet?</a></div>
+                            </div>
+    
+                            <div class="row center">
+                                <button class="btn waves-effect waves-light red accent-2" type="submit" name="action">SIGN IN</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-          </form>
         </div>
-      </div>
-    </div>
-
-    <footer class="page-footer transparent">
-        <div class="footer-copyright transparent">
-          <div class="container center-align grey-text text-darken-4">
-            <span>©2020. Web & Internet Programming.</span>    
-          </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="row footer-container">
+        <div class="container footer-pane">
+            <div class="col s12 center-align grey-text text-darken-4">
+                <span>&copy; 2020. Web &amp; Internet Programming.</span>    
+            </div>
         </div>
     </footer>
-  
+
   <!-- Importing materialize.css library -->
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
