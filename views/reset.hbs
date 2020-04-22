@@ -20,34 +20,29 @@
     <div class="container">
       <div class="valign-wrapper row signin-box">
         <div class="col card hoverable s12 white z-depth-3">
-          <form class="col s12">
-            <div class="card-content">
-                <h5 class="center-align text-darken-2">Sign In</h5>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">account_circle</i>
-                        <input id="email" type="email" class="validate" autocomplete="off">
-                        <label for="email" class="red-text accent-2">Email</label>
+            <form class="col s12">
+                <div class="card-content">
+                    <div class="row">
+                        <a href="/signin" class="btn-flat right">
+                            <i class="material-icons">close</i>
+                        </a>
                     </div>
 
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">lock_open</i>
-                        <input id="password" type="password" class="validate">
-                        <label for="password" class="red-text accent-2">Password</label>
+                    <h5 class="center-align grey-text text-darken-2">Reset Password</h5>
+                    <p class="center-align">A password reset link will be sent to your email.</p>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate" autocomplete="off">
+                            <label for="email" class="red-text accent-2">What's your email?</label>
+                        </div>
+                    </div>
+
+                    <div class="row center">
+                        <button class="btn btn-large waves-effect waves-light red accent-2" type="submit" name="action">RESET</button>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col s6"><a href="reset.html" class="grey-text text-darken-4">Forgot password?</a></div>
-                    <div class="col s6 right-align"><a href="signup.html" class="grey-text text-darken-4">Not a member yet?</a></div>
-                </div>
-
-                <div class="row center">
-                    <button class="btn btn-large waves-effect waves-light red accent-2" type="submit" name="action">SIGN IN</button>
-                </div>
-            </div>
-          </form>
+            </form>
         </div>
       </div>
     </div>
@@ -55,11 +50,11 @@
     <footer class="page-footer transparent">
         <div class="footer-copyright transparent">
           <div class="container center-align grey-text text-darken-4">
-            <span>©2020. Web & Internet Programming.</span>    
+            <span>©2020. Web & Internet Programming.</span>      
           </div>
         </div>
     </footer>
-  
+
   <!-- Importing materialize.css library -->
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

@@ -20,10 +20,18 @@
     <div class="container">
       <div class="valign-wrapper row signin-box">
         <div class="col card hoverable s12 white z-depth-3">
-          <form class="col s12">
+          <form class="col s12" action="/submit" method ="POST">
             <div class="card-content">
+            
+              {{!-- Signup Error Message --}}
+              {{#if message}}
+              <div class="error">
+                {{message}}
+              </div>
+              {{/if}}
+
                 <div class="row">
-                    <a href="signin.html" class="btn-flat right">
+                    <a href="/signin" class="btn-flat right">
                         <i class="material-icons">close</i>
                     </a>
                 </div>
@@ -34,20 +42,20 @@
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="first_name" type="text" class="validate">
+                            <input id="first_name" type="text" class="validate" name="first_name" required/>
                             <label for="first_name" class="red-text accent-2">First Name</label>
                         </div>
                         <div class="input-field col s6">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="last_name" type="text" class="validate">
+                            <input id="last_name" type="text" class="validate" name="last_name" required/>
                             <label for="last_name" class="red-text accent-2">Last Name</label>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
-                            <input id="email" type="email" class="validate">
+                            <input id="email" type="email" class="validate" name="email" required/>
                             <label for="email" class="red-text accent-2">Email</label>
                         </div>
                     </div>
@@ -55,13 +63,13 @@
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">lock_outline</i>
-                            <input id="password" type="password" class="validate">
+                            <input id="password" type="password" class="validate" name="password" id="password" required/>
                             <label for="password" class="red-text accent-2">Password</label>
                         </div>
                         <div class="input-field col s6">
                             <i class="material-icons prefix">lock_outline</i>
-                            <input id="confirm_password" type="password" class="validate">
-                            <label for="confirm_password" class="red-text accent-2">Confirm Password</label>
+                            <input id="confirm_password" type="password" class="validate" name="confirmPassword" id="confirmPassword" required/>
+                            <label for="confirm_password" class="red-text accent-2" data-error="Password match" data-success="Password doesn't match">Confirm Password</label>
                         </div>
                     </div> 
                 </div>
