@@ -1,0 +1,29 @@
+<!-- /**
+ * @author Chidambaram Crushev, Valentine Aduaka
+*/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>POJAN - {{pageTitle}}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Material Icons. If there is a requirement, we can import this.  -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <!--Importing materialize.css library, Compiled and minified CSS -->
+  <link rel="stylesheet" href="/plugins/materialize/materialize.min.css" media="screen,projection">
+  <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body {{#if navBarEnabled }} class="has-fixed-sidenav" {{/if}}> 
+
+    {{{ body }}}
+
+    <!-- Importing materialize.css library -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="/plugins/materialize/materialize.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>  
+    <script src="/js/script.js"></script>
+</body>
+</html>

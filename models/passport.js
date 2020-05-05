@@ -1,4 +1,4 @@
-const localStrategy = require('passport-local').Strategy;
+/* const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const database = require('./database-config');
 const query = require('./queries');
@@ -109,3 +109,4 @@ function authenticateEmail(rows) {
     }
     return flag;
 }
+ */
