@@ -7,4 +7,4 @@ const values = {
     'signupError': 'Email already exists. Try different email!'
 }
 
-module.exports= values;
+module.exports = values;

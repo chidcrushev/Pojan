@@ -1,0 +1,36 @@
+  {{> header}}
+
+  <main>
+    <div class="container section">
+      <div class="row card-posts">
+        <div class="col s12">
+          <div class="card sticky-action">
+            <div class="card-content">
+              <a class="modal-trigger grey-text text-darken-4" href="#modal1"><span class="card-title">DATA SCIENCE & ML <i class="material-icons right">more_vert</i></a></span>
+              <ul class="card-breadcrumb">
+                <li><i class="material-icons green-text accent-4 ">lens</i><span></span></li>
+                <li><span>RESEARCH ASSISTANT</span></li>
+                <li><span class="tooltipped" data-position="top" data-tooltip="Open to All">OTA</span></li>
+                <li><i class="material-icons">access_time</i><span>a minute ago</span></li>
+              </ul>
+              <p>
+                I am a very simple card. I am good at containing small bits of information. 
+                I am convenient because I require little markup to use effectively.
+              </p>
+            </div>
+            <div class="card-action">              
+              <span class="tooltipped" data-position="bottom" data-tooltip="12 applicants"><i class="material-icons">group</i> 12 </span>
+              <span class="tooltipped" data-position="bottom" data-tooltip="24 views"><i class="material-icons">visibility</i> 24</span>
+              <a href="apply.html" class="btn btn-small right red accent-2 waves-effect">Apply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{!-- Load modal --}}
+      {{> posts/modal }}
+
+      {{!-- Load pagination links --}}
+      {{> posts/pagination}}
+    </div>
+  </main>

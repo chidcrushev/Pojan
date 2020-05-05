@@ -5,11 +5,14 @@
   "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chidcrushev/finalProject.git"
+    "url": "git+https://github.com/chidcrushev/finalProject.git",
+    "publishConfig": {
+      "registry": "https://npm.pkg.github.com/"
+    }
   },
   "keywords": [
     "webapplication"
@@ -28,7 +31,9 @@
     "express": "^4.17.1",
     "express-handlebars": "^4.0.3",
     "express-session": "^1.17.1",
+    "multer": "^1.4.2",
     "mustache": "^4.0.1",
+    "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "session": "^0.1.0",

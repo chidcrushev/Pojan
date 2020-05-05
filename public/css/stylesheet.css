@@ -12,7 +12,7 @@ body.has-fixed-sidenav{
 
 .bg-template{
     background-image: linear-gradient(rgba(255, 82, 182, 0.678), rgba(206, 0, 0, 0.562)), url(../img/learning.jpg);
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     position: fixed;
     top: 0;
@@ -156,10 +156,6 @@ input[type=email]:focus,input[type=password]:focus,input[type=text]:focus,textar
  box-shadow: 0 1px 0 0 #ff5252  !important;
 }
 
-.error {
-  padding: 10px;
-  text-align: center;
-}
 [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
     background-color: #ff5252;
 }
@@ -264,4 +260,42 @@ input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+/* 404 Page */
+.notfound-bg-template{
+    background-image: linear-gradient(rgba(255, 82, 183, 0.144), rgba(206, 0, 0, 0.562)), url(../img/notfound.jpg);
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 50%;
+}
+
+.notfound-pane{
+    background-color: #111111;
+    display: table; 
+    height:100%; 
+    margin: 0 auto 0 0;
+    width: 50%;
+}
+
+.notfound-pane .container{
+    display: table-cell; 
+    vertical-align: middle;
+}
+
+.notfound-pane .container  h1{
+    font-size: 120px;
+}
+.notfound-pane .container span.notfound-title{
+    color: #ff5252;
+    font-weight: 600;
+}
+
+.notfound-pane .container span{
+    display: block;
 }

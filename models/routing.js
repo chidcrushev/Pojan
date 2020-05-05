@@ -10,8 +10,11 @@ const projectDirectory = path.join(__dirname, '../public');
 module.exports = function (app, passport) {
     //Retrieves the signin page initially
     app.get('/', (request, response, next) => {
-        response.render('signin', {
-            layout: false
+        // response.render('signin', {
+        //     layout: false
+        // });
+        response.render('index', {
+            title: 'Home page'
         });
     });
 
