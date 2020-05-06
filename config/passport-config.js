@@ -4,11 +4,11 @@ const db  = require('../config/database-config');
 const helpers  = require('../config/helpers');
 
 // Establish and maintained session via a cookie set in the user's browser.
-passport.serializeUser(function (user, done) {
+passport.serializeUser( (user, done) => {
     done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
@@ -23,10 +23,10 @@ passport.use('signin', new LocalStrategy ({
 
             if (rows.length > 0) {
 
-                let flag = authenticatePassword(rows, password);
+                let flag = comparePassword(rows, password);
 
                 if ( flag == true ) {
-                    return done(null, {id: rows[0].id});
+                    return done(null, {id: rows[0].user_id});
                 } else {
                     return done(null, false, { message: 'Your password is incorrect.' });
                 }
@@ -39,7 +39,7 @@ passport.use('signin', new LocalStrategy ({
 ));
 
 // To check whether the entered password is correct or not
-let authenticatePassword = (rows, password) => {
+let comparePassword = (rows, password) => {
 
     let flag = false;
 

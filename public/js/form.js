@@ -4,15 +4,74 @@ let PojanForm = {
        
         self.signInForm = config.signInForm;
         self.signUpForm = config.signUpForm;
+        self.createPostForm = config.createPostForm;
 
         self.loaderElem = document.getElementById('loader');
         self.formError = document.getElementById('formError');
 
         self.btnSignUp = document.getElementById("btnSignUp");
         self.btnSignIn = document.getElementById("btnSignIn");
+        self.btnCreatePost = document.getElementById("btnCreatePost");
 
         self.signInForm ? self.signInForm.addEventListener('submit', self.applySignIn) : false;  
         self.signUpForm ? self.signUpForm.addEventListener('submit', self.applySignUp) : false;  
+        self.createPostForm ? self.createPostForm.addEventListener('submit', self.applyCreatePostForm) : false;  
+    },
+
+    applyCreatePostForm: async (e) => {
+        let self = PojanForm;
+
+        e.preventDefault();
+        
+        // Disable the submit button
+        self.disableBtn(self.btnCreatePost);
+
+        // Show loader
+        self.loader(true, self.createPostForm);
+
+        // Get form data
+        let formData = new FormData(self.createPostForm);
+
+        // Create time stamp
+        let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        formData.append('created_at', date);
+        formData.append('updated_at', date);
+
+        // Post form data
+        self.requests('/posts/create', formData,  null)
+        .then( response => {
+
+            if (response.ok ) {
+                return response.json();
+            }
+        
+            throw new Error(response.statusText);
+
+        }).then( result => {
+            
+            // Disable the div error element if it is visible 
+            if( self.formError){
+                self.formError.classList.add('hide');
+                self.formError.textContent = '';
+            }
+            
+            // Display the success toast and redirect to signin page after 5 secs
+            self.displayToast(result.message)
+            .then( () => {
+                self.createPostForm.reset();
+                window.location = '/posts';
+            });
+
+        }).catch( error => {
+
+            // Throw error
+            self.formError.classList.add('show');
+            self.formError.textContent = error.message;
+
+        }).finally(() => {
+            self.loader(false, self.createPostForm);
+            self.enableBtn(self.btnCreatePost);
+        });
     },
 
     applySignIn: async ( e ) => {

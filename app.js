@@ -29,7 +29,6 @@ const hbs = exphbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
-
 // Passport Middleware config
 app.use(express.static("public"));
 app.use(require('express-session')({ secret: 'secret', resave: false, saveUninitialized: false }));
@@ -37,11 +36,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 // Static folder
 app.use( express.static(path.join(__dirname, 'public'), {extensions: ['html', 'htm']}) );
 app.use(express.urlencoded({ extended: true }));
-
 
 // Use flash
 app.use(flash());

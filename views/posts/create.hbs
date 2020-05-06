@@ -2,7 +2,7 @@
 
   <main>
     <div class="container section">
-        <form action="/index.html">
+        <form class="col s12" id="createPostForm" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col s12 m12 l8">
                     <div class="card">
@@ -10,25 +10,33 @@
                             <div class="card-title">
                                 <h5>CREATE A NEW POST</h5>
                             </div>
+
+                            <div class="row">
+                                <div class="col s12">
+                                    <div id="formError" class="form-error"></div>
+                                </div>
+                            </div>
+                            
+
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate">
+                                    <input id="title" type="text" class="validate" name="title" required>
                                     <label for="title">Job Title</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <textarea id="description" class="materialize-textarea"></textarea>
+                                    <textarea id="description" class="materialize-textarea" class="validate" name="description" required></textarea>
                                     <label for="description">Job Description</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <textarea id="requirement" class="materialize-textarea"></textarea>
+                                    <textarea id="requirement" class="materialize-textarea" class="validate" name="requirement" required></textarea>
                                     <label for="requirement">Requirements</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <select>
+                                    <select name="assistantship" class="validate" required>
                                       <option value="" disabled selected>Choose your option</option>
                                       <option value="1">Graduate</option>
-                                      <option value="2">Research</option>
-                                      <option value="3">Teaching</option>
+                                      <option value="2">Teaching</option>
+                                      <option value="3">Research</option>
                                     </select>
                                     <label>Assistantship Type</label>
                                 </div>
@@ -39,7 +47,7 @@
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <!-- <i class="material-icons prefix">textsms</i> -->
-                                            <input type="text" id="autocomplete-input" class="autocomplete" autocomplete="off">
+                                            <input placeholder="Start typing to select department" type="text" id="autocomplete-input" class="autocomplete validate" autocomplete="off" name="department" required>
                                             <label for="autocomplete-input">Select Department</label>
                                         </div>
                                     </div>
@@ -57,14 +65,14 @@
                                     <div class="row section">
                                         <div class="col s12 m4">
                                             <label>
-                                                <input class="with-gap" name="group1" type="radio" checked />
+                                                <input class="with-gap" name="requisite" type="radio" value="Closed To All" checked required/>
                                                 <span>CTA</span>
                                             </label>
                                         </div>
                                         
                                         <div class="col s12 m4">
                                             <label>
-                                                <input class="with-gap" name="group1" type="radio"/>
+                                                <input class="with-gap" name="requisite" type="radio" value="Open To All" required/>
                                                 <span>OTA</span>
                                             </label>
                                         </div>
@@ -78,19 +86,19 @@
                                     <div class="row section">
                                         <div class="col s4 l4">
                                             <label>
-                                                <input type="checkbox" class="filled-in" checked="checked" />
+                                                <input type="checkbox" class="filled-in" checked="checked" name="email" value="email"/>
                                                 <span>Email</span>
                                             </label>
                                         </div>
                                         <div class="col s4 l4">
                                             <label>
-                                                <input type="checkbox" class="filled-in" checked="checked" />
+                                                <input type="checkbox" class="filled-in" checked="checked" name="push" value="push"/>
                                                 <span>Push</span>
                                             </label>
                                         </div>
                                         <div class="col s4 l4">
                                             <label>
-                                                <input type="checkbox" class="filled-in"/>
+                                                <input type="checkbox" class="filled-in" name="sms" value="sms"/>
                                                 <span>SMS</span>
                                             </label>
                                         </div>
@@ -103,9 +111,9 @@
                     <div class="row">
                         <div class="col s12">
                             <h5>Terms &amp; Conditions</h5>
-                            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p> Please just make sure you are doing the right thing. </p>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" required/>
                                 <span>I agree to the terms &amp; conditions</span>
                             </label>
                         </div>
@@ -113,15 +121,29 @@
 
                     <div class="row ">
                         <div class="col s12">
-                            <button class="btn waves-effect waves-light red accent-2" type="submit" name="action">CREATE</button>
+                            <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" id="btnCreatePost">CREATE</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {{!-- Loader --}}
+            <div class="preloader-wrapper active loader" id="loader">
+                <div class="spinner-layer spinner-red-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
         </form>
-        
     </div>
   </main>
 
 {{> script-generic }}
 {{> script }}
+{{> posts/form-init }}

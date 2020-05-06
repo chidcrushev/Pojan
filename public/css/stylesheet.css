@@ -10,6 +10,27 @@ body.has-fixed-sidenav{
     padding-left: 300px;
 }
 
+@media screen and (min-width: 0px) and (max-width: 794px) {
+
+    body{
+        padding-left: 0px !important;
+    }
+
+    body.has-fixed-sidenav{
+        padding-left: 0px !important;
+    }
+
+    div.nav-wrapper{
+        width: calc(100% + 300px);
+    }
+
+    nav.navbar{
+        width: calc(100% + 300px);
+        left: 0px;
+    }
+}
+
+
 .bg-template{
     background-image: linear-gradient(rgba(255, 82, 182, 0.678), rgba(206, 0, 0, 0.562)), url(../img/learning.jpg);
     background-size: contain;
@@ -91,9 +112,13 @@ body.has-fixed-sidenav{
     border-top: 1px solid #e3e3e3;
 }
 
-nav.navbar{
+div.nav-wrapper{
     width: calc(100% - 300px);
-    left: 300px;
+}
+
+nav.navbar{
+    /* width: calc(100% - 300px);
+    left: 300px; */
     z-index: 10;
     transition: box-shadow .3s, background-color .3s;
     padding: 0 20px;
@@ -142,11 +167,12 @@ form.uses-loader{
     padding: 10px;
     font-weight: 500;
     text-align: center;
-    margin-bottom: 5px;
+    margin: 5px 0;
     display: none;
 }
 
 .uses-loader:after{
+    z-index: 1000;
     content: '';
     display: block;
     position: absolute;

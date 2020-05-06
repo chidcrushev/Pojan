@@ -20,7 +20,14 @@
   let autocomplete_instance = M.Autocomplete.init(autocomplete, {data: {
       "Computer Science": null,
       "Astronomy": null,
-      "Chemical Engineering": 'https://placehold.it/250x250'
+      "Chemistry": null,
+      "Physics": null,
+      "Biology": null,
+      "Agriculture": null,
+      "Arts": null,
+      "Geology": null,
+      "Mathematical Sciences": null,
+      "Social Sciences": null,
   }});
 
   // Materialize Dropdown initialization
