@@ -122,9 +122,15 @@ let PojanForm = {
         });
     },
 
-    disableBtn: ( e ) => e.submitter.setAttribute('disabled', 'disabled'),
+    disableBtn: ( e ) => {
+        let btn = document.getElementById(e.target.action.id);
+        btn.setAttribute('disabled', 'disabled');
+    },
     
-    enableBtn: ( e ) => e.submitter.removeAttribute('disabled'),
+    enableBtn: ( e ) => {
+        let btn = document.getElementById(e.target.action.id);
+        btn.removeAttribute('disabled');
+    },
    
     loader: ( bool, form ) => {
         let self = PojanForm;

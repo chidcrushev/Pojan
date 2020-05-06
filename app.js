@@ -42,6 +42,7 @@ app.use(passport.session());
 app.use( express.static(path.join(__dirname, 'public'), {extensions: ['html', 'htm']}) );
 app.use(express.urlencoded({ extended: true }));
 
+
 // Use flash
 app.use(flash());
 

@@ -26,7 +26,7 @@ passport.use('signin', new LocalStrategy ({
                 let flag = authenticatePassword(rows, password);
 
                 if ( flag == true ) {
-                    return done(null, rows[0].id);
+                    return done(null, {id: rows[0].id});
                 } else {
                     return done(null, false, { message: 'Your password is incorrect.' });
                 }

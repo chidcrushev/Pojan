@@ -18,6 +18,7 @@ app.use('/posts', postsRoute);
 app.use('/user', userRoute);
 app.use('/notification', notificationRoute);
 
+
 // Render 404 for non registered routes
 app.use((req, res, next) => {
     res.status(404).render('404', {pageTitle: '404'});
