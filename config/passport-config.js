@@ -8,8 +8,11 @@ passport.serializeUser(function (user, done) {
     done(null, user);
 });
 
-passport.deserializeUser(function (user, done) {
-    done(null, user);
+passport.deserializeUser(function (id, done) {
+ 
+    db.query('SELECT * FROM user where user_id = ?', [id.user], (error, rows, fields) => {
+        done(null,rows[0]);
+    });
 });
 
 passport.use('signin', new LocalStrategy ({
@@ -26,7 +29,7 @@ passport.use('signin', new LocalStrategy ({
                 let flag = authenticatePassword(rows, password);
 
                 if ( flag == true ) {
-                    return done(null, {id: rows[0].id});
+                    return done(null, {user: rows[0].user_id});
                 } else {
                     return done(null, false, { message: 'Your password is incorrect.' });
                 }
