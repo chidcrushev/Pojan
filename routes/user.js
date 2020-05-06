@@ -1,9 +1,7 @@
 const express   = require('express');
-const app       = express();
 const Router    = express.Router();
-const db        = require('../models/database-config');
 
-
+// Render user profile page
 Router.get('/profile', (req, res) => {
     res.render('user/profile', {
         navBarEnabled: true,

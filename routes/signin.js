@@ -1,14 +1,47 @@
 const express   = require('express');
-const app       = express();
 const Router    = express.Router();
-const db        = require('../models/database-config');
+const passport  = require('../config/passport-config');
+const multer    = require('multer');
+const upload    = multer();
 
 
+// Show sign in page
 Router.get('/', (req, res) => {
     res.render('signin',{
         pageTitle: 'Sign In'
     });
 });
 
-module.exports = Router;
+// Handle sign in request
+Router.post('/', upload.none(), (req, res, next) => {
 
+    passport.authenticate('signin', (err, user, info) => {
+
+        if (err) { 
+            res.statusMessage = info.message;
+            return res.status(401).send();
+        }
+
+        if (!user) { 
+            res.statusMessage = info.message;
+            return res.status(400).send();
+        }
+
+        req.logIn(user, (err) => {
+            if (err) { 
+                res.statusMessage = err.message;
+                return res.status(400).send(); 
+            }
+
+            return res.status(200).json({message: 'Redirecting you to the posts page'});
+        });
+        
+    })(req, res, next);
+    
+}, (err, req, res, next) => {
+    // failure in login route
+    res.statusMessage = err.message;
+    return res.status(400).send();
+});
+
+module.exports = Router;

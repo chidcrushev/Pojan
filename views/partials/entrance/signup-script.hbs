@@ -1,0 +1,21 @@
+<script>
+     // Password and confirm password validation
+    let password = document.getElementById("password")
+    let confirmPassword = document.getElementById("confirm_password");
+
+    let validatePassword = () => {
+        if (password.value != confirmPassword.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
+    let signUpForm = document.getElementById('signUpForm');
+
+    // Initialize signup form    
+    PojanForm.init({signUpForm: signUpForm ? signUpForm : false});
+</script>

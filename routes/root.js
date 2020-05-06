@@ -1,13 +1,11 @@
 const express   = require('express');
-const app       = express();
 const Router    = express.Router();
-const db        = require('../models/database-config');
 
-
+// Render app root
 Router.get('/', (req, res) => {
 
-    res.render('posts/', {
-        navBarEnabled: true,
+    res.render('signin', {
+        navBarEnabled: false,
         pageTitle: 'posts'
     });
     
