@@ -132,11 +132,42 @@ ul.card-breadcrumb li:not(:first-child):not(:last-child):after{
     padding: 0 10px;
 }
 
-.loader{
-    position: absolute;
-    top: calc(50% - 50px);
-    left: calc(50% - 50px);
+form.uses-loader{
+    position: relative;
 }
+
+.form-error{
+    background-color: #e53935 ;
+    color: #ffffff;
+    padding: 10px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 5px;
+    display: none;
+}
+
+.uses-loader:after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255,255,255,.8);
+}
+
+.loader{
+    display: none;
+    z-index: 5000;
+    position: absolute;
+    top: calc(60% - 50px);
+    left: calc(56% - 50px);
+}
+
+.hide{ display: none; }
+.show{ display: block; }
 
 .material-icons{
     color: rgba(0,0,0,0.54);

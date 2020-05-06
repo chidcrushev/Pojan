@@ -1,10 +1,7 @@
-const path      = require('path');
 const express   = require('express');
-const app       = express();
 const Router    = express.Router();
-const db        = require('../models/database-config');
 
-
+// Render posts page
 Router.get('/', (req, res, next) => {
     res.render('posts/',{
         navBarEnabled: true,
@@ -12,6 +9,7 @@ Router.get('/', (req, res, next) => {
     });
 });
 
+// Render posts creation page
 Router.get('/create', (req, res, next) => {
     res.render('posts/create',{
         navBarEnabled: true,
@@ -19,6 +17,8 @@ Router.get('/create', (req, res, next) => {
     });
 });
 
+
+// Render posts application page
 Router.get('/apply/:postid', (req, res, next) => {
     res.render('posts/apply',{
         navBarEnabled: true,

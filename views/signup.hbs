@@ -4,7 +4,7 @@
         <div class="row signup-box">
             <div class="col card s12 white z-depth-1">
                 <a href="/signin" class="close-pane-icon"><i class="material-icons">close</i></a>
-                <form class="" action="/submit" method="POST">
+                <form class="" action="/signup" id="signUpForm" method="POST" enctype="multipart/form-data">
                     <div class="card-content">
                         <h5 class="center-align text-darken-2">POJAN</h5>
 
@@ -14,18 +14,17 @@
                             </div>
                         </div>
 
-                            {{!-- Signup Error Message --}}
-                        {{#if message}} <div class="error">{{message}}</div>{{/if}}
+                        <div id="formError" class="form-error"></div>
 
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input id="first_name" type="text" class="validate" autocomplete="off">
+                                <input id="first_name" type="text" class="validate" autocomplete="off" name="firstname" required>
                                 <label for="first_name" class="red-text accent-2">First Name</label>
                             </div>
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input id="last_name" type="text" class="validate" autocomplete="off">
+                                <input id="last_name" type="text" class="validate" autocomplete="off" name="lastname" required>
                                 <label for="last_name" class="red-text accent-2">Last Name</label>
                             </div>
                         </div>
@@ -33,7 +32,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <i class="material-icons prefix">email</i>
-                                <input id="email" type="email" class="validate" autocomplete="off">
+                                <input id="email" type="email" class="validate" autocomplete="off" name="email" required>
                                 <label for="email" class="red-text accent-2">Email</label>
                             </div>
                         </div>
@@ -41,12 +40,12 @@
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">lock_outline</i>
-                                <input id="password" type="password" class="validate">
+                                <input id="password" type="password" class="validate" name="password" required>
                                 <label for="password" class="red-text accent-2">Password</label>
                             </div>
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">lock_outline</i>
-                                <input id="confirm_password" type="password" class="validate">
+                                <input id="confirm_password" type="password" class="validate" name="confirm_password" required>
                                 <label for="confirm_password" class="red-text accent-2">Confirm Password</label>
                             </div>
                         </div> 
@@ -54,23 +53,37 @@
                         <div class="row">
                             <div class="col s6 m6">
                                 <label>
-                                    <input class="with-gap" name="group1" type="radio" checked />
+                                    <input class="with-gap" name="isStudent" type="radio" value="true" checked required/>
                                     <span>Student</span>
                                 </label>
                             </div>
                             
                             <div class="col s6 m6">
                                 <label>
-                                    <input class="with-gap" name="group1" type="radio"/>
+                                    <input class="with-gap" name="isStudent" value="false" type="radio" required/>
                                     <span>Faculty member</span>
                                 </label>
                             </div>
                         </div>
 
                         <div class="row center section">
-                            <button class="btn waves-effect waves-light red accent-2" type="submit" name="action">SIGN UP</button>
+                            <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" id="btnSignUp">SIGN UP</button>
                         </div>
                     </div> 
+
+                    {{!-- Loader --}}
+                    <div class="preloader-wrapper active loader" id="loader">
+                        <div class="spinner-layer spinner-red-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -78,3 +91,5 @@
 </main>
 
 {{> entrance-footer }}
+{{> script-generic }}
+{{> entrance/signup-script }}

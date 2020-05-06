@@ -1,9 +1,7 @@
 const express   = require('express');
-const app       = express();
 const Router    = express.Router();
-const db        = require('../models/database-config');
 
-
+// Render reset page
 Router.get('/', (req, res) => {
     res.render('reset');
 });

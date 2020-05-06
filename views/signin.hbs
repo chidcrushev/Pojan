@@ -3,28 +3,28 @@
         <div class="container">
             <div class="row signin-box">
                 <div class="col card s12 white z-depth-1">
-                    <form class="col s12" action="/">
+                    <form class="col s12" id="signInForm" method="POST" enctype="multipart/form-data">
                         <div class="card-content">
                             <h5 class="center-align text-darken-2">POJAN</h5>
-
-                            {{#if message}} <div class="error"> {{message}}</div> {{/if}}
 
                             <div class="row">
                                 <div class="col s12 center">
                                     <h6 class="center-align">Sign In</h6>
                                 </div>
                             </div>
+
+                            <div id="formError" class="form-error"></div>
                             
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="email" type="email" class="validate" autocomplete="off">
+                                    <input id="email" type="email" class="validate" autocomplete="off" name="email" required>
                                     <label for="email" class="red-text accent-2">Email</label>
                                 </div>
     
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">lock_open</i>
-                                    <input id="password" type="password" class="validate">
+                                    <input id="password" type="password" class="validate" name="password" required>
                                     <label for="password" class="red-text accent-2">Password</label>
                                 </div>
                             </div>
@@ -35,7 +35,21 @@
                             </div>
     
                             <div class="row center">
-                                <button class="btn waves-effect waves-light red accent-2" type="submit" name="action">SIGN IN</button>
+                                <button class="btn waves-effect waves-light red accent-2" type="submit" id="btnSignIn">SIGN IN</button>
+                            </div>
+                        </div>
+
+                        {{!-- Loader --}}
+                        <div class="preloader-wrapper active loader" id="loader">
+                            <div class="spinner-layer spinner-red-only">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -45,3 +59,5 @@
     </main>
 
 {{> entrance-footer }}
+{{> script-generic }}
+{{> entrance/signin-script }}
