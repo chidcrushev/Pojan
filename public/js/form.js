@@ -8,6 +8,9 @@ let PojanForm = {
         self.loaderElem = document.getElementById('loader');
         self.formError = document.getElementById('formError');
 
+        self.btnSignUp = document.getElementById("btnSignUp");
+        self.btnSignIn = document.getElementById("btnSignIn");
+
         self.signInForm ? self.signInForm.addEventListener('submit', self.applySignIn) : false;  
         self.signUpForm ? self.signUpForm.addEventListener('submit', self.applySignUp) : false;  
     },
@@ -17,7 +20,7 @@ let PojanForm = {
         e.preventDefault();
 
         // Disable the submit button
-        self.disableBtn(e);
+        self.disableBtn(self.btnSignIn);
 
         // Show loader
         self.loader(true, self.signInForm);
@@ -58,7 +61,7 @@ let PojanForm = {
 
         }).finally(() => {
             self.loader(false, self.signInForm);
-            self.enableBtn(e);
+            self.enableBtn(self.btnSignIn);
         });
     },
     
@@ -67,7 +70,7 @@ let PojanForm = {
         e.preventDefault();
 
         // Disable the submit button
-        self.disableBtn(e);
+        self.disableBtn(self.btnSignUp);
 
         // Show loader
         self.loader(true, self.signUpForm);
@@ -118,18 +121,16 @@ let PojanForm = {
 
         }).finally(() => {
             self.loader(false, self.signUpForm);
-            self.enableBtn(e);
+            self.enableBtn(self.btnSignUp);
         });
     },
 
     disableBtn: ( e ) => {
-        let btn = document.getElementById(e.target.action.id);
-        btn.setAttribute('disabled', 'disabled');
+        e.setAttribute('disabled', 'disabled');
     },
     
     enableBtn: ( e ) => {
-        let btn = document.getElementById(e.target.action.id);
-        btn.removeAttribute('disabled');
+        e.removeAttribute('disabled');
     },
    
     loader: ( bool, form ) => {
