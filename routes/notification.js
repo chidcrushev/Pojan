@@ -1,8 +1,8 @@
-const express   = require('express');
-const Router    = express.Router();
+const express       = require('express');
+const Router        = express.Router();
+const authetication = require('../auth/middleware/auth-middleware'); 
 
-
-Router.get('/', (req, res) => {
+Router.get('/',authetication, (req, res) => {
     res.render('notification');
 });
 

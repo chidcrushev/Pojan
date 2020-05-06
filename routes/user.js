@@ -1,13 +1,18 @@
 const express   = require('express');
 const Router    = express.Router();
+const db  = require('../config/database-config');
+const authetication = require('../auth/middleware/auth-middleware');
+
 
 // Render user profile page
-Router.get('/profile', (req, res) => {
+Router.get('/profile', authetication, (req, res) => {
     res.render('user/profile', {
         navBarEnabled: true,
         isPageActive: true
     });
 });
 
-module.exports = Router;
 
+module.exports = Router;  
+
+ 
