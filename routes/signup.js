@@ -10,6 +10,12 @@ let sqlErrors = {'1062': {'title': 'Duplicate Entry', 'message': 'Email already 
 
 // Render sign up page
 Router.get('/', (req, res, next) => {
+
+        //Prevent the user from vising the login page
+        if(req.isAuthenticated()){
+            return res.redirect('posts');
+        }
+
     res.render('signup', {
         pageTitle: 'Sign Up'
     });

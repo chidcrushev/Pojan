@@ -12,8 +12,8 @@
             <img src="/img/triangles.png">
         </div>
         <a href="#user"><img class="circle" src="/img/avatar.png"></a>
-        <a href="#name"><span class="white-text name">Valentine Aduaka</span></a>
-        <a href="#email"><span class="white-text email">vaduaka@nmsu.edu</span></a>
+        <a href="#name"><span class="white-text name">{{info.firstname}} {{info.lastname}}</span></a>
+        <a href="#email"><span class="white-text email">{{info.email}}</span></a>
         </div>
     </li>
     <li><a href="/posts"><i class="material-icons">art_track</i>Postings</a></li>
@@ -23,9 +23,12 @@
     <li><a href="#!"><i class="material-icons">settings</i>Settings</a></li>
     
     <li><a class="subheader">Manage Postings</a></li>
+    
+    {{#if (eq info.isStudent 0)}}
     <li><a href="/posts/create"><i class="material-icons">note_add</i>Create Post</a></li>
     <!-- <li><a class="subheader">Subheader</a></li> -->
-    
+    {{/if}}
+
 
     <li><div class="divider"></div></li>
     <li><a href="/signout"><i class="material-icons">cloud_off</i>Sign Out</a></li>
