@@ -3,15 +3,21 @@ const Router    = express.Router();
 const passport  = require('../config/passport-config');
 const multer    = require('multer');
 const upload    = multer();
-const authetication = require('../auth/middleware/auth-middleware');
-
+const authentication  = require('../auth/middleware/auth-middleware'); 
 
 // Show sign in page
 Router.get('/', (req, res) => {
+    
+    if(req.isAuthenticated()){
+        return res.redirect('posts');
+    }
+
     res.render('signin',{
-        pageTitle: 'Sign In'
+        navBarEnabled: false,
+        pageTitle: 'signin'
     });
 });
+    
 
 // Handle sign in request
 Router.post('/', upload.none(), (req, res, next) => {

@@ -4,7 +4,7 @@ const db        = require('../config/database-config');
 const multer    = require('multer');
 const upload    = multer();
 const helpers   = require('../config/helpers');
-const authetication = require('../auth/middleware/auth-middleware');
+const authentication = require('../auth/middleware/auth-middleware');
 
 // Custom MySql Errors
 let sqlErrors = {'1062': {'title': 'Duplicate Entry', 'message': 'Email already exists. Please try again with a different email.'}};
@@ -53,21 +53,34 @@ Router.get('/', async (req, res, next) => {
     });
 });
 
+// Render posts page
+Router.get('/',authentication, (req, res, next) => {
+ 
+    res.render('posts/',{
+        navBarEnabled: true,
+        pageTitle: 'posts',
+        info : req.user
+    });
+});
+
 // Render posts creation page
-Router.get('/create', (req, res, next) => {
+
+Router.get('/create',authentication, (req, res, next) => {
     res.render('posts/create',{
         navBarEnabled: true,
-        pageTitle: 'create'
+        pageTitle: 'create',
+        info : req.user
     });
 });
 
 
 // Render posts application page
-Router.get('/apply/:post_id', (req, res, next) => {
-    // console.log(req.params.post_id);
+Router.get('/apply/:postid',authentication, (req, res, next) => {
     res.render('posts/apply',{
         navBarEnabled: true,
-        pageTitle: 'apply'
+        pageTitle: 'apply',
+        info : req.user
+
     });
 });
 

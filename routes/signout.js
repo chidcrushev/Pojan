@@ -1,9 +1,13 @@
 const express   = require('express');
 const Router    = express.Router();
+const authentication  = require('../auth/middleware/auth-middleware'); 
 
-Router.get('/', function(req, res){
+Router.get('/',authentication, function(req, res){
     req.logout();
-    res.redirect('signin');
+    req.session.destroy(function(){
+        res.clearCookie('connect.sid');
+        res.redirect('signin');
+    });
 });
 
 module.exports = Router;
