@@ -16,6 +16,7 @@ const routes      = require('./routes/routes'); // used
 const port        = process.env.PORT || 3000; // used
 const flash         = require('connect-flash');
 const helpers        = require('./config/helpers');
+const authentication        = require('./auth/middleware/auth-middleware');
 
 // Handlebars engine setup
 const hbs = exphbs.create({
@@ -37,7 +38,7 @@ const hbs = exphbs.create({
             return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
         },
         
-        initials: helpers.initials
+        initials: helpers.initials,
     }
 });
 
@@ -53,24 +54,26 @@ app.use(require('express-session')({
     saveUninitialized: false, 
     cookie: { _expires: (10 * 60 * 60 * 1000) } 
 }));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Static folder
-app.use( express.static(path.join(__dirname, 'public'), {extensions: ['html', 'htm']}) );
+app.use(express.static(path.join(__dirname, 'public'), {extensions: ['html', 'htm']}) );
 app.use(express.urlencoded({ extended: true }));
 
 // Use flash
 app.use(flash());
 
-app.use('/*',(req, res, next) =>{
+app.use('/*', (req, res, next) =>{
     res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     next();
 });
 
 // Register all application routes
 app.use('/', routes);
+// app.use(authentication);
 
 // Start the server 
 http.listen(port, () => console.log(`Server is listening on port ${port}`));   

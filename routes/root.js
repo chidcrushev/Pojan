@@ -1,6 +1,5 @@
 const express   = require('express');
 const Router    = express.Router();
-const authentication  = require('../auth/middleware/auth-middleware'); 
 
 // Render app root
 Router.get('/', (req, res) => {

@@ -100,48 +100,48 @@ let PojanForm = {
         self.loader(true, self.applyPostForm);
 
         // Get form data
-        // let formData = new FormData(self.createPostForm);
+        let formData = new FormData(self.applyPostForm);
 
-        // // Create time stamp
-        // let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        // formData.append('created_at', date);
-        // formData.append('updated_at', date);
+        // Create time stamp
+        let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        formData.append('created_at', date);
+        formData.append('updated_at', date);
 
         // Post form data
-        // self.requests('/posts/create', formData,  null)
-        // .then( response => {
+        self.requests('/posts/create', formData,  null)
+        .then( response => {
 
-        //     if (response.ok ) {
-        //         return response.json();
-        //     }
+            if (response.ok ) {
+                return response.json();
+            }
         
-        //     throw new Error(response.statusText);
+            throw new Error(response.statusText);
 
-        // }).then( result => {
+        }).then( result => {
             
-        //     // Disable the div error element if it is visible 
-        //     if( self.formError){
-        //         self.formError.classList.add('hide');
-        //         self.formError.textContent = '';
-        //     }
+            // Disable the div error element if it is visible 
+            if( self.formError){
+                self.formError.classList.add('hide');
+                self.formError.textContent = '';
+            }
             
-        //     // Display the success toast and redirect to signin page after 5 secs
-        //     self.displayToast(result.message)
-        //     .then( () => {
-        //         self.createPostForm.reset();
-        //         window.location = '/posts';
-        //     });
+            // Display the success toast and redirect to signin page after 5 secs
+            self.displayToast(result.message)
+            .then( () => {
+                self.applyPostForm.reset();
+                window.location = '/posts';
+            });
 
-        // }).catch( error => {
+        }).catch( error => {
 
-        //     // Throw error
-        //     self.formError.classList.add('show');
-        //     self.formError.textContent = error.message;
+            // Throw error
+            self.formError.classList.add('show');
+            self.formError.textContent = error.message;
 
-        // }).finally(() => {
-        //     self.loader(false, self.createPostForm);
-        //     self.enableBtn(self.btnCreatePost);
-        // });
+        }).finally(() => {
+            self.loader(false, self.applyPostForm);
+            self.enableBtn(self.btnCreatePost);
+        });
     },
 
     applyCreatePostForm: async (e) => {

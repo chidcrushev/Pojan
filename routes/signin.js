@@ -3,7 +3,6 @@ const Router    = express.Router();
 const passport  = require('../config/passport-config');
 const multer    = require('multer');
 const upload    = multer();
-const authentication  = require('../auth/middleware/auth-middleware'); 
 
 // Show sign in page
 Router.get('/', (req, res) => {

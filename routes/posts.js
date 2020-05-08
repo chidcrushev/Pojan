@@ -4,7 +4,7 @@ const db        = require('../config/database-config');
 const multer    = require('multer');
 const upload    = multer();
 const helpers   = require('../config/helpers');
-const authentication = require('../auth/middleware/auth-middleware');
+const auth = require('../auth/middleware/auth-middleware');
 
 // Custom MySql Errors
 let sqlErrors = {'1062': {'title': 'Duplicate Entry', 'message': 'Email already exists. Please try again with a different email.'}};
@@ -21,9 +21,9 @@ let sqlErrors = {'1062': {'title': 'Duplicate Entry', 'message': 'Email already 
     - Get views data from  post_view
 */
 // Render posts page
-Router.get('/', async (req, res, next) => {
+Router.get('/', auth.isLoggedIn, async (req, res, next) => {
 
-    await dbQuery(`SELECT
+    await db.dbQuery(`SELECT
         COUNT(p.fk_post_id) as NOSOFAPPLICANTS,
         post.post_id, post.post_title, post.description, post.requirement, post.status, post.created_at, post.updated_at,
         user.user_id, user.firstname, user.lastname, user.email,
@@ -45,7 +45,8 @@ Router.get('/', async (req, res, next) => {
         res.render('posts/', {
             navBarEnabled: true,
             pageTitle: 'posts',
-            response: rows
+            response: rows,
+            info: req.user,
             // error: (typeof result === 'function') ? result(data => req.flash(data)) : false
         });
     }).catch((error) => {
@@ -54,7 +55,7 @@ Router.get('/', async (req, res, next) => {
 });
 
 // Render posts page
-Router.get('/',authentication, (req, res, next) => {
+Router.get('/', auth.isLoggedIn, (req, res, next) => {
  
     res.render('posts/',{
         navBarEnabled: true,
@@ -65,22 +66,21 @@ Router.get('/',authentication, (req, res, next) => {
 
 // Render posts creation page
 
-Router.get('/create',authentication, (req, res, next) => {
+Router.get('/create', auth.isLoggedIn, auth.isAdmin, (req, res, next) => {
     res.render('posts/create',{
         navBarEnabled: true,
-        pageTitle: 'create',
+        pageTitle: 'Create a Post',
         info : req.user
     });
 });
 
 
 // Render posts application page
-Router.get('/apply/:postid',authentication, (req, res, next) => {
+Router.get('/apply/:postid', auth.isLoggedIn, (req, res, next) => {
     res.render('posts/apply',{
         navBarEnabled: true,
-        pageTitle: 'apply',
+        pageTitle: 'Apply',
         info : req.user
-
     });
 });
 
@@ -92,14 +92,14 @@ Router.get('/apply/:postid',authentication, (req, res, next) => {
     - insert into posts table
     - on successful insertion, broadcast the notifications
 */
-Router.post('/create', upload.none(), async (req, res, next) => {
+Router.post('/create', upload.none(), auth.isLoggedIn, async (req, res, next) => {
     let postData = req.body;
 
     // Fetch the dept_id of the selected department
-    let get_dept_id = await dbQuery('SELECT dept_id FROM department WHERE dept_name = ?', postData.department).catch( error => console.log(error));
+    let get_dept_id = await db.dbQuery('SELECT dept_id FROM department WHERE dept_name = ?', postData.department).catch( error => console.log(error));
 
     // Fetch the requisite_id of the selected requisite type
-    let get_requisite_id = await dbQuery('SELECT requisite_id FROM requisite WHERE requisite_title = ?', postData.requisite).catch( error => console.log(error));
+    let get_requisite_id = await db.dbQuery('SELECT requisite_id FROM requisite WHERE requisite_title = ?', postData.requisite).catch( error => console.log(error));
                                 
     // Fetch the assistantship_id of the selected assistanship type
     let assistantship_id = Number(postData.assistantship);
@@ -124,7 +124,7 @@ Router.post('/create', upload.none(), async (req, res, next) => {
     postData.fk_requisite_id = get_requisite_id[0].requisite_id;
 
     // Insert data into db
-    await dbQuery('INSERT INTO post SET ?', postData)
+    await db.dbQuery('INSERT INTO post SET ?', postData)
     .then( ( response ) => {
         // Get selected notifications: sms, push, email
         // use await and async here 
@@ -149,16 +149,16 @@ Router.post('/create', upload.none(), async (req, res, next) => {
     });
 });
 
-let dbQuery = async ( query, val = null) => {
-    return await new Promise((resolve, reject) => {
-        db.query( query, [val], (err, rows, fields) => {                                              
-            if(rows === undefined){
-                reject(new Error(err));
-            }else{
-                resolve(rows);
-            }
-        }
-    )}
-)};
+// let dbQuery = async ( query, val = null) => {
+//     return await new Promise((resolve, reject) => {
+//         db.query( query, [val], (err, rows, fields) => {                                              
+//             if(rows === undefined){
+//                 reject(new Error(err));
+//             }else{
+//                 resolve(rows);
+//             }
+//         }
+//     )}
+// )};
 
 module.exports = Router;

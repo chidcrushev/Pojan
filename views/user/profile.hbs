@@ -7,7 +7,7 @@
             <div class="col l12 s12">
                 <div class="card">
                     <div class="card-content">
-                        <img class="img-rounded profile-avatar left" src="/img/profile/avatars/1.jpg" alt="avatar">
+                        <img class="img-rounded profile-avatar left" src="{{info.avatar}}" alt="avatar">
                         <div class="profile-title">
                             <h5 class="">{{info.firstname}} {{info.lastname}}</h5>
                             <p>{{info.email}}</p>
@@ -19,60 +19,87 @@
             
                     <div class="card-content">
                         <div class="section">
-                            <div class="row">
-                                <div class="col s12 m4">
-                                  <h6 class="profile-category">Personal Information <a href="#edit" class="modal-trigger"><i class="material-icons">edit</i>Edit</a></h6>
-                                  <p></p>
-                                </div>
-                                <div class="col s12 m8">
-                                    <div class="row">
-                                        <div class="col s12 l6">
-                                            <h6>First Name</h6>
-                                            <span>{{info.firstname}}</span>
-                                        </div>
-                                        <div class="col s12 l6">
-                                            <h6>Last Name</h6>
-                                            <span>{{info.lastname}}</span>
-                                        </div>
-                                        
+                           <section class="profile-section">
+                               <h6>Change your avatar</h6>
+                                <div class="row">
+                                    <div class="col s2 l2">
+                                        <img class="z-depth-1 hoverable profile-avatars" src="/img/profile/avatars/1.jpg" alt="">
                                     </div>
-                                    <div class="divider"></div>
-                                    <div class="row">
-                                        <div class="col s12 l6">
-                                            <h6>Email</h6>
-                                            <span>{{info.email}}</span>
-                                        </div>
+                                    <div class="col s2 l2">
+                                        <img class="z-depth-1 hoverable profile-avatars" src="/img/profile/avatars/2.jpg" alt="">
                                     </div>
-                                    <div class="divider"></div>
-                                    <div class="row">
-                                        <div class="col s12 l6">
-                                            <h6>Phone</h6>
-                                            <span>{{#if info.phone}}{{info.phone}} {{else}} --- {{/if}}</span>
-                                        </div>
+                                    <div class="col s2 l2">
+                                        <img class="z-depth-1 hoverable profile-avatars" src="/img/profile/avatars/3.jpg" alt="">
+                                    </div>
+                                    <div class="col s2 l2">
+                                        <img class="z-depth-1 hoverable profile-avatars" src="/img/profile/avatars/4.jpg" alt="">
+                                    </div>
+                                    <div class="col s2 l2">
+                                        <img class="z-depth-1 hoverable profile-avatars" src="/img/profile/avatars/5.jpg" alt="">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 m4">
-                                  <h6 class="profile-category">Faculty Information <!-- <a href="#"><i class="material-icons">edit</i>Edit</a> --></h6>
-                                  <p></p>
-                                </div>
-                                <div class="col s12 m8">
-                                    <div class="row">
-                                        <div class="col s12 l6">
-                                            <h6>Student ID</h6>
-                                            <span>{{#if info.student_id}}{{info.student_id}} {{else}} --- {{/if}}</span>
+                            </section>
+
+                            <div class="divider"></div>
+
+                            <section class="profile-section">
+                                <div class="row">
+                                    <div class="col s12 m4">
+                                    <h6 class="profile-category">Personal Information <a href="#edit" class="modal-trigger"><i class="material-icons">edit</i>Edit</a></h6>
+                                    </div>
+                                    <div class="col s12 m8">
+                                        <div class="row">
+                                            <div class="col s12 l6">
+                                                <h6>First Name</h6>
+                                                <span>{{info.firstname}}</span>
+                                            </div>
+                                            <div class="col s12 l6">
+                                                <h6>Last Name</h6>
+                                                <span>{{info.lastname}}</span>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="row">
+                                            <div class="col s12 l6">
+                                                <h6>Email</h6>
+                                                <span>{{info.email}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="row">
+                                            <div class="col s12 l6">
+                                                <h6>Phone</h6>
+                                                <span>{{#if info.phone}}{{info.phone}} {{else}} --- {{/if}}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="divider"></div>
-                                    <div class="row">
-                                        <div class="col s12 l6">
-                                            <h6>Department</h6>
-                                            <span>{{#if departmentInfo}}{{departmentInfo}} {{else}} --- {{/if}}</span>
+                                </div>
+                            </section>
+                            
+                            <section class="profile-section">
+                                <div class="row">
+                                    <div class="col s12 m4">
+                                    <h6 class="profile-category">Faculty Information</h6>
+                                    <p></p>
+                                    </div>
+                                    <div class="col s12 m8">
+                                        <div class="row">
+                                            <div class="col s12 l6">
+                                                <h6>Student ID</h6>
+                                                <span>{{#if info.student_id}}{{info.student_id}} {{else}} --- {{/if}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="row">
+                                            <div class="col s12 l6">
+                                                <h6>Department</h6>
+                                                <span>{{#if departmentInfo}}{{departmentInfo}} {{else}} --- {{/if}}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </section>
                         </div>
                         
                     </div>
@@ -97,24 +124,24 @@
             <form class="col s12" class="" action="/signup" id="profileForm" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="first_name" type="text" name="firstname" value="Valentine">
+                        <input id="first_name" type="text" name="firstname" value="{{info.firstname}}">
                         <label for="first_name">First Name</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate" name="lastname" value="Aduaka">
+                        <input id="last_name" type="text" class="validate" name="lastname" value="{{info.lastname}}">
                         <label for="last_name">Last Name</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input disabled value="vaduaka@nmsu.edu" id="disabled" type="email">
+                        <input disabled value="{{info.email}}" id="disabled" type="email">
                         <label for="disabled">Email</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12">
                         <div class="input-field col s12">
-                            <input type="text" name="phone">
+                            <input type="text" name="phone" value="{{info.phone}}">
                             <label for="phone">Phone</label>
                         </div>
                     </div>
@@ -122,7 +149,7 @@
                 <div class="row">
                     <div class="col s12">
                         <div class="input-field col s12">
-                            <input type="text" name="student_id">
+                            <input type="text" name="student_id" value="{{info.student_id}}">
                             <label for="student_id">Student Id</label>
                         </div>
                     </div>

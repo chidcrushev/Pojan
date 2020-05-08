@@ -17,4 +17,17 @@ connection.connect((err) => {
     }
 });
 
+// Generic db query
+connection.dbQuery = async ( query, val = null) => {
+    return await new Promise((resolve, reject) => {
+        connection.query( query, [val], (err, rows, fields) => {                                              
+            if(rows === undefined){
+                reject(new Error(err));
+            } else {
+                resolve(rows);
+            }
+        }
+    )}
+)};
+
 module.exports = connection;
