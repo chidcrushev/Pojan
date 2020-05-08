@@ -40,9 +40,17 @@
 
   let referrer = document.referrer;
 
-  if ( referrer.split('/').indexOf('signup') > 0){
-    M.toast({html: 'Please sign in with your credentials'});
-  }
+  /* 
+    if the flash message element has a textContent, then fire the toast
+  */
+
+  // if ( referrer.split('/').indexOf('signup') > 0){
+  //   M.toast({html: 'Please sign in with your credentials'});
+  // }
+
+  // if ( referrer.split('/').indexOf('create') > 0){
+  //   M.toast({html: 'Your post was successfully created'});
+  // }
 
   // Toggle top bar menu dropdown
 //   document.querySelector(".navbar-dropdown").addEventListener('click', (e) => {

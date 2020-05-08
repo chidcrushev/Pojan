@@ -7,7 +7,7 @@
             <div class="col l12 s12">
                 <div class="card">
                     <div class="card-content">
-                        <img class="img-rounded profile-avatar left" src="/img/avatar.png" alt="avatar">
+                        <img class="img-rounded profile-avatar left" src="/img/profile/avatars/1.jpg" alt="avatar">
                         <div class="profile-title">
                             <h5 class="">Valentine Aduaka</h5>
                             <p>vaduaka@nmsu.edu</p>
@@ -21,7 +21,7 @@
                         <div class="section">
                             <div class="row">
                                 <div class="col s12 m4">
-                                  <h6 class="profile-category">Personal Information <a href="#"><i class="material-icons">edit</i>Edit</a></h6>
+                                  <h6 class="profile-category">Personal Information <a href="#edit" class="modal-trigger"><i class="material-icons">edit</i>Edit</a></h6>
                                   <p></p>
                                 </div>
                                 <div class="col s12 m8">
@@ -82,5 +82,72 @@
     </div>
   </main>
 
+  {{!-- <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> --}}
+
+  <!-- Modal Structure -->
+  <div id="edit" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Update profile Information</h4>
+      <p>You can only update your contact info</p>
+
+      <div id="formError" class="form-error"></div>
+      
+        <div class="row">
+            <form class="col s12" class="" action="/signup" id="profileForm" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" type="text" name="firstname" value="Valentine">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate" name="lastname" value="Aduaka">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input disabled value="vaduaka@nmsu.edu" id="disabled" type="email">
+                        <label for="disabled">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="input-field col s12">
+                            <input type="text" name="phone">
+                            <label for="phone">Phone</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="input-field col s12">
+                            <input type="text" name="student_id">
+                            <label for="student_id">Student Id</label>
+                        </div>
+                    </div>
+                </div>
+                {{!-- Loader --}}
+                <div class="preloader-wrapper active loader" id="loader">
+                    <div class="spinner-layer spinner-red-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="waves-effect waves-light pink darken-3 btn-flat white-text" id="btnProfile">UPDATE</button>
+    </div>
+  </div>
+
   {{> script-generic }}
   {{> script }}
+  {{> script-profile }}

@@ -8,8 +8,11 @@ passport.serializeUser( (user, done) => {
     done(null, user);
 });
 
-passport.deserializeUser((user, done) => {
-    done(null, user);
+passport.deserializeUser(function (user, done) {
+ 
+    db.query('SELECT * FROM user where user_id = ?', [user.id], (error, rows, fields) => {
+        done(null,rows[0]);
+    });
 });
 
 passport.use('signin', new LocalStrategy ({
@@ -19,11 +22,12 @@ passport.use('signin', new LocalStrategy ({
     // session: false
 }, (request, email, password, done) => {
 
-        db.query('SELECT * FROM user where email = ?', [email], (error, rows, fields) => {
+    console.log(email);
+        db.query('SELECT * FROM user where email = ?', [email.trim()], (error, rows, fields) => {
 
             if (rows.length > 0) {
 
-                let flag = comparePassword(rows, password);
+                let flag = comparePassword(rows, password.trim());
 
                 if ( flag == true ) {
                     return done(null, {id: rows[0].user_id});

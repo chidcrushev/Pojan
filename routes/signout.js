@@ -1,7 +1,9 @@
-// const express   = require('express');
-// const Router    = express.Router();
+const express   = require('express');
+const Router    = express.Router();
 
-// // Router.get('/signout', function(req, res){
-// //     req.logout();
-// //     res.redirect('/signin');
-// // });
+Router.get('/', function(req, res){
+    req.logout();
+    res.redirect('signin');
+});
+
+module.exports = Router;

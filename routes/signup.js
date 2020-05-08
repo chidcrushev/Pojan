@@ -16,35 +16,47 @@ Router.get('/', (req, res, next) => {
 });
 
 // Handle sign up request
-Router.post('/', upload.none(), (req, res, next) => {
+Router.post('/', upload.none(), async (req, res, next) => {
 
+    // Get the post data
     let postData = req.body;
 
-    // Convert the isStudent data type implicitly
-    if (postData.isStudent === 'true') {
-        postData.isStudent = true;
-    } else {
-        postData.isStudent = false;
-    }
+    // Validate email address
+    helpers.validateEmail(postData.email)
+    .then((email) => {
+        
+        // Cleanup user data
+        postData.firstname  = helpers.ucFirst(postData.firstname).trim();
+        postData.lastname   = helpers.ucFirst(postData.lastname).trim();
+        postData.password   = postData.password.trim();
+        postData.avatar     = `/img/profile/avatars/${Math.floor(Math.random() * 5) + 1}.jpg`
+        postData.email      = email.trim();
 
-    // Hash the password
-    let hashedPassword = helpers.hash(postData.password);
+        // Convert the isStudent data type implicitly
+        postData.isStudent  = (postData.isStudent === 'true') ? true : false;
 
-    if (hashedPassword) {
+        // Hash the password
+        let hashedPassword = helpers.hash(postData.password);
 
-        // Replaced password with hashed
-        postData.password = hashedPassword;
+        if (hashedPassword) {
 
-        // Insert new user's data into the database
-        db.query('INSERT INTO user SET ?', postData, (error, results, fields) => {
-            if (error) {
-                res.statusMessage = sqlErrors[error.errno].message;
-                res.status(400).send();
-            } else {
-                res.status(200).json({message: 'Your account has been successfully created'});
-            }
-        });
-    }
+            // Replaced password with hashed
+            postData.password = hashedPassword;
+
+            // Insert new user's data into the database
+            db.query('INSERT INTO user SET ?', postData, (error, results, fields) => {
+                if (error) {
+                    res.statusMessage = sqlErrors[error.errno].message;
+                    res.status(400).send();
+                } else {
+                    res.status(200).json({message: 'Your account has been successfully created'});
+                }
+            });
+        }
+    }).catch((error) => {
+        res.statusMessage = error;
+        res.status(400).send();
+    });
 });
 
 module.exports = Router;

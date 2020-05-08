@@ -2,6 +2,7 @@ const express           = require('express');
 const app               = express();
 const signInRoute       = require('./signin');
 const signUpRoute       = require('./signup');
+const signOutRoute      = require('./signout');
 const resetRoute        = require('./reset');
 const postsRoute        = require('./posts');
 const userRoute         = require('./user');
@@ -10,9 +11,10 @@ const rootRoute         = require('./root');
 
 /* Register application routes */
 
-// app.use('/', rootRoute);
+app.use('/', rootRoute);
 app.use('/signin', signInRoute);
 app.use('/signup', signUpRoute);
+app.use('/signout', signOutRoute);
 app.use('/reset', resetRoute);
 app.use('/posts', postsRoute);
 app.use('/user', userRoute);

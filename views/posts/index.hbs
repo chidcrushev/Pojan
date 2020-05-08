@@ -3,28 +3,29 @@
   <main>
     <div class="container section">
       <div class="row card-posts">
-        <div class="col s12">
-          <div class="card sticky-action">
-            <div class="card-content">
-              <a class="modal-trigger grey-text text-darken-4" href="#modal1"><span class="card-title">DATA SCIENCE & ML <i class="material-icons right">more_vert</i></a></span>
-              <ul class="card-breadcrumb">
-                <li><i class="material-icons green-text accent-4 ">lens</i><span></span></li>
-                <li><span>RESEARCH ASSISTANT</span></li>
-                <li><span class="tooltipped" data-position="top" data-tooltip="Open to All">OTA</span></li>
-                <li><i class="material-icons">access_time</i><span>a minute ago</span></li>
-              </ul>
-              <p>
-                I am a very simple card. I am good at containing small bits of information. 
-                I am convenient because I require little markup to use effectively.
-              </p>
+        {{#each response }}
+            <div class="col s12">
+              <div class="card sticky-action">
+                <div class="card-content">
+                  <a class="modal-trigger grey-text text-darken-4" href="#modal1"><span class="card-title">{{this.post_title}} <i class="material-icons right">more_vert</i></a></span>
+                  <ul class="card-breadcrumb">
+                    <li><i class="material-icons {{#if (eq this.status 1)}} green-text {{else}} red-text {{/if}} accent-4 ">lens</i><span></span></li>
+                    <li><span>{{this.assistantship_title}}</span></li>
+                    <li><span class="tooltipped" data-position="top" data-tooltip="{{ this.requisite_title }}">{{ initials this.requisite_title}}</span></li>
+                    <li><i class="material-icons">access_time</i><span>{{this.created_at}}</span></li>
+                  </ul>
+                  <p class="truncate">
+                    {{this.description}}
+                  </p>
+                </div>
+                <div class="card-action">              
+                  <span class="tooltipped" data-position="bottom" data-tooltip="{{this.NOSOFAPPLICANTS}} applicants"><i class="material-icons">group</i> {{ this.NOSOFAPPLICANTS }} </span>
+                  <span class="tooltipped" data-position="bottom" data-tooltip="24 views"><i class="material-icons">visibility</i> 24</span>
+                  <a href="/posts/apply/{{this.post_id}}" class="btn btn-small right pink darken-3 waves-effect">Apply</a>
+                </div>
+              </div>
             </div>
-            <div class="card-action">              
-              <span class="tooltipped" data-position="bottom" data-tooltip="12 applicants"><i class="material-icons">group</i> 12 </span>
-              <span class="tooltipped" data-position="bottom" data-tooltip="24 views"><i class="material-icons">visibility</i> 24</span>
-              <a href="apply.html" class="btn btn-small right red accent-2 waves-effect">Apply</a>
-            </div>
-          </div>
-        </div>
+        {{/each}}
       </div>
 
       {{!-- Load modal --}}

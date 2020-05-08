@@ -6,7 +6,7 @@ Router.get('/', (req, res) => {
 
     res.render('signin', {
         navBarEnabled: false,
-        pageTitle: 'posts'
+        pageTitle: 'Sign In'
     });
     
     // workings

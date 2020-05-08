@@ -1,7 +1,7 @@
 .clearfix::after {content: ""; display: table;clear: both;}
 html, body{height: 100%;}
 body{
-    background-color: #f4f4f4;
+    background-color: #f3f3f3;
     font-family: Lato;
     font-weight: 300;
 }
@@ -32,7 +32,7 @@ body.has-fixed-sidenav{
 
 
 .bg-template{
-    background-image: linear-gradient(rgba(255, 82, 182, 0.678), rgba(206, 0, 0, 0.562)), url(../img/learning.jpg);
+    background-image: linear-gradient(rgba(139, 0, 46, 0.685), rgba(172, 3, 40, 0.719)), url(../img/learning.jpg);
     background-size: contain;
     background-position: center;
     position: fixed;
@@ -157,7 +157,7 @@ ul.card-breadcrumb li:not(:first-child):not(:last-child):after{
     padding: 0 10px;
 }
 
-form.uses-loader{
+main form.uses-loader{
     position: relative;
 }
 
@@ -171,8 +171,8 @@ form.uses-loader{
     display: none;
 }
 
-.uses-loader:after{
-    z-index: 1000;
+form.uses-loader:after{
+    z-index: 10000;
     content: '';
     display: block;
     position: absolute;
@@ -186,7 +186,7 @@ form.uses-loader{
 
 .loader{
     display: none;
-    z-index: 5000;
+    z-index: 10000;
     position: absolute;
     top: calc(60% - 50px);
     left: calc(56% - 50px);
@@ -201,7 +201,7 @@ form.uses-loader{
 }
 
 .material-icons.active {
-  color: #cc3f3d !important;
+  color: #c2185b  !important;
 }
 
 .input-field .prefix{
@@ -209,34 +209,34 @@ form.uses-loader{
 }
 
 input[type=email]:focus,input[type=password]:focus,input[type=text]:focus,textarea:focus {
- border-bottom: 1px solid #ff5252  !important;
- box-shadow: 0 1px 0 0 #ff5252  !important;
+ border-bottom: 1px solid #ad1457  !important;
+ box-shadow: 0 1px 0 0 #ad1457  !important;
 }
 
 [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:after {
-    background-color: #ff5252;
+    background-color: #ad1457;
 }
 
 [type="radio"]:checked+span:after, [type="radio"].with-gap:checked+span:before, [type="radio"].with-gap:checked+span:after {
-    border: 2px solid #ff5252;
+    border: 2px solid #ad1457;
 }
 
 [type="checkbox"].filled-in:checked+span:not(.lever):after {
-    border: 2px solid #ff5252;
-    background-color: #ff5252;
+    border: 2px solid #ad1457;
+    background-color: #ad1457;
 }
 
 [type="checkbox"]:checked+span:not(.lever):before {
-    border-right: 2px solid #ff5252;
-    border-bottom: 2px solid #ff5252;
+    border-right: 2px solid #ad1457;
+    border-bottom: 2px solid #ad1457;
 }
 
 input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser-default):focus:not([readonly]) + label, input[type="password"]:not(.browser-default):focus:not([readonly]) + label, input[type="email"]:not(.browser-default):focus:not([readonly]) + label, input[type="url"]:not(.browser-default):focus:not([readonly]) + label, input[type="time"]:not(.browser-default):focus:not([readonly]) + label, input[type="date"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime-local"]:not(.browser-default):focus:not([readonly]) + label, input[type="tel"]:not(.browser-default):focus:not([readonly]) + label, input[type="number"]:not(.browser-default):focus:not([readonly]) + label, input[type="search"]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
-    color: #ff5252;
+    color: #ad1457;
 }
 
 .dropdown-content li>a, .dropdown-content li>span {
-    color: #ff5252;
+    color: #ad1457;
 }
 
 .brand-logo{
@@ -244,30 +244,14 @@ input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser
     height: 100%;
     font-weight: 300;
 }
-
-.brand-logo:after{
-    transition: all .2s ease-in-out;
-    content: "\203A";
-    font-weight: 600;
-    margin-left: 5px;
-    opacity: .3;
+.brand-logo img{
+    height: 25px;
 }
 
-.brand-logo:before{
-    transition: all .2s ease-in-out;
-    content: "\2039";
-    font-weight: 600;
-    margin-right: 5px;
-    opacity: .3;
-}
-.brand-logo:hover:after{
-    margin-left: 10px;
-    opacity: 1;
-}
-
-.brand-logo:hover:before{
-    margin-right: 10px;
-    opacity: 1;
+.sign-in-up-logo{
+    display: block;
+    margin: auto;
+    height: 25px;
 }
 
 .sidenav .user-view .background img{
@@ -349,7 +333,7 @@ input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser
     font-size: 120px;
 }
 .notfound-pane .container span.notfound-title{
-    color: #ff5252;
+    color: #ad1457;
     font-weight: 600;
 }
 

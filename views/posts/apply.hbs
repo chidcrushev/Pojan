@@ -2,10 +2,11 @@
 
   <main>
     <div class="container section">
-        <form action="index.html">
+        <form id="applyPostForm" method="POST" enctype="multipart/form-data">
+         <input type="hidden" name="fk_post_id" value="{{ this.post_id }}">
             <div class="row">
                 <div class="col s12">
-                    <h5>ICT - NETWORK ADMIN</h5>
+                    <h5>{{ this.post_title }}</h5>
                 </div>
             </div>
             <div class="row">
@@ -13,14 +14,17 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="row">
-                                <p>You are applying for the role, ICT - NETWORK ADMIN </p>
+                                <p>You are applying for the role of {{ this.post_title }} </p>
+
+                                <div id="formError" class="form-error"></div>
+                                
                                 <div class="section">
                                     <div class="input-field col s12">
                                         <textarea id="description" class="materialize-textarea"></textarea>
                                         <label for="description">Message to hiring personnel</label>
                                     </div>
                                     <div class="file-field  col s12 input-field">
-                                        <div class="btn red accent-2">
+                                        <div class="btn pink darken-3">
                                           <span>Resume</span>
                                           <input type="file" multiple>
                                         </div>
@@ -47,15 +51,28 @@
 
                     <div class="row ">
                         <div class="col s12">
-                            <button class="btn waves-effect waves-light red accent-2" type="submit" name="action" id="btnApply">APPLY</button>
+                            <button class="btn waves-effect waves-light pink darken-3" type="submit" id="btnApplyPost">APPLY</button>
                         </div>
                     </div>
                 </div>
             </div>
+            {{!-- Loader --}}
+            <div class="preloader-wrapper active loader" id="loader">
+                <div class="spinner-layer spinner-red-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
         </form>
-        
     </div>
   </main>
 
-  {{> script-generic }}
-  {{> script }}
+{{> script-generic }}
+{{> script }}
+{{> script-apply }}
