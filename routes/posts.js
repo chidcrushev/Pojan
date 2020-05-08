@@ -1,29 +1,34 @@
 const express        = require('express');
 const Router         = express.Router();
-const authetication  = require('../auth/middleware/auth-middleware'); 
+const authentication  = require('../auth/middleware/auth-middleware'); 
 
 // Render posts page
-Router.get('/',authetication, (req, res, next) => {
+Router.get('/',authentication, (req, res, next) => {
+ 
     res.render('posts/',{
         navBarEnabled: true,
-        pageTitle: 'posts'
+        pageTitle: 'posts',
+        info : req.user
     });
 });
 
 // Render posts creation page
-Router.get('/create',authetication, (req, res, next) => {
+Router.get('/create',authentication, (req, res, next) => {
     res.render('posts/create',{
         navBarEnabled: true,
-        pageTitle: 'create'
+        pageTitle: 'create',
+        info : req.user
     });
 });
 
 
 // Render posts application page
-Router.get('/apply/:postid',authetication, (req, res, next) => {
+Router.get('/apply/:postid',authentication, (req, res, next) => {
     res.render('posts/apply',{
         navBarEnabled: true,
-        pageTitle: 'apply'
+        pageTitle: 'apply',
+        info : req.user
+
     });
 });
 

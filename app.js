@@ -22,7 +22,10 @@ const hbs = exphbs.create({
     defaultLayout:  path.join(__dirname, 'views/layouts/main'), 
     layoutsDir:     path.join(__dirname, 'views/layouts'),
     views:          path.join(__dirname, 'views'),
-    extname:        'hbs'
+    extname:        'hbs',
+    helpers:        {
+        eq:(v1,v2) => v1===v2,
+    }
 });
 
 // Set Handlebars Engine
@@ -45,6 +48,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use flash
 app.use(flash());
+
+app.use('/*',(req, res, next) =>{
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+    next();
+});
 
 // Register all application routes
 app.use('/', routes);
