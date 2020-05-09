@@ -4,7 +4,8 @@ const Router    = express.Router();
 const db        = require('../config/database-config');
 const multer    = require('multer');
 const helpers   = require('../config/helpers');
-const auth      = require('../auth/middleware/auth-middleware');
+const auth = require('../auth/middleware/auth-middleware');
+const moment    = require('moment');
 const upload    = multer();
 
 const fileupload   = multer({
@@ -52,12 +53,11 @@ Router.get('/fetch/:postid', async (req, res, next) => {
         GROUP BY post.post_id
         ORDER BY post.updated_at DESC`, [post_id]
     ).then((rows) => {
-        console.log(rows);
         res.render('modal', {
             layout: false,
             navBarEnabled: true,
             pageTitle: 'posts',
-            response: rows[0],
+            response: helpers.formatTime(rows[0]),
             info: req.user,
             applyUrl: '/posts/apply/'+post_id
         });
@@ -87,12 +87,13 @@ Router.get('/', auth.isLoggedIn, async (req, res, next) => {
         LEFT  JOIN  post_applicant p ON p.fk_post_id = post.post_id
         
         GROUP BY post.post_id
-        ORDER BY post.updated_at DESC`
-    ).then((rows) => {
+        ORDER BY post.created_at DESC
+    `).then((rows) => {
+        let result = helpers.formatTime(rows);
         res.render('posts/', {
             navBarEnabled: true,
             pageTitle: 'posts',
-            response: rows,
+            response: result,
             info: req.user,
             // error: (typeof result === 'function') ? result(data => req.flash(data)) : false
         });
