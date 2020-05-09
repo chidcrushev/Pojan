@@ -3,10 +3,11 @@
   <main>
     <div class="container section">
         <form id="applyPostForm" method="POST" enctype="multipart/form-data">
-         <input type="hidden" name="fk_post_id" value="{{ this.post_id }}">
+         <input type="hidden" name="fk_post_id" value="{{ post.post_id }}">
+         <input type="hidden" name="fk_user_id" value="{{ post.post_id }}">
             <div class="row">
                 <div class="col s12">
-                    <h5>{{ this.post_title }}</h5>
+                    <h5>{{ post.post_title }}</h5>
                 </div>
             </div>
             <div class="row">
@@ -14,22 +15,23 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="row">
-                                <p>You are applying for the role of {{ this.post_title }} </p>
+                                <p>You are applying for the role: {{ post.post_title }} </p>
 
                                 <div id="formError" class="form-error"></div>
                                 
                                 <div class="section">
                                     <div class="input-field col s12">
-                                        <textarea id="description" class="materialize-textarea"></textarea>
-                                        <label for="description">Message to hiring personnel</label>
+                                        <textarea id="message" class="materialize-textarea" name="post_applicant_message" data-length="500" maxlength="500"></textarea>
+                                        <label for="message">Message to hiring personnel</label>
                                     </div>
                                     <div class="file-field  col s12 input-field">
                                         <div class="btn pink darken-3">
                                           <span>Resume</span>
-                                          <input type="file" multiple>
+                                          <input type="file" multiple name="resume">
                                         </div>
                                         <div class="file-path-wrapper">
-                                          <input class="file-path validate" type="text" placeholder="Please upload your resume">
+                                            <input class="file-path validate" type="text" placeholder="Please upload your resume" required>
+                                            <span class="helper-text red-text accent-2">.pdf and .docx files only. Files should be 5MB or less.</span>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +45,7 @@
                             <h5>Terms &amp; Conditions</h5>
                             <p> Just make sure you are doing the right thing.</p>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" required/>
                                 <span>I agree to the terms &amp; conditions</span>
                             </label>
                         </div>

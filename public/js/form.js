@@ -2,13 +2,13 @@ let PojanForm = {
     init: ( config ) => {
         let self = PojanForm;
 
-        console.log('Form fired Fired:', config.applyPostForm);
-       
         self.signInForm = config.signInForm;
         self.signUpForm = config.signUpForm;
         self.createPostForm = config.createPostForm;
         self.applyPostForm = config.applyPostForm;
         self.profileForm = config.profileForm;
+
+        self.elemFetchPost = config.fetchPostId;
 
         self.loaderElem = document.getElementById('loader');
         self.formError = document.getElementById('formError');
@@ -24,6 +24,46 @@ let PojanForm = {
         self.createPostForm ? self.createPostForm.addEventListener('submit', self.applyCreatePostForm) : false;  
         self.applyPostForm ? self.applyPostForm.addEventListener('submit', self.applyPost) : false;  
         self.profileForm ? self.profileForm.addEventListener('submit', self.applyProfile) : false;  
+
+        if( self.elemFetchPost ) {
+            self.elemFetchPost.forEach(element => {
+                element.addEventListener('click', self.fetchPostData.bind(event, element));
+            });
+        }
+    },
+
+    fetchPostData: ( elem, e ) => {
+
+        e.preventDefault();
+
+        // Get post id from data attribute
+        let dataid = elem.getAttribute('data-postid');
+
+        // Request content for related post id
+        fetch('/posts/fetch/' + dataid, {
+            method: 'GET',
+            headers: {
+                'Content-type' : 'application/json'
+            }
+        }).then((response) => {
+            if (response.ok) {
+                // Return raw html
+                return response.text();
+            }
+        }).then((result) => {
+            let modal = document.getElementById('modal1');
+            
+            let instance = M.Modal.getInstance(modal);
+            
+            // Render html template to the modal window
+            if( instance.isOpen ){
+                modal.innerHTML = result;
+            }
+        }).catch( error => {
+            alert('Could not etch requested content. Please try again!');
+        }).finally(() => {
+
+        });
     },
 
     applyProfile: async (e) => {
@@ -85,6 +125,12 @@ let PojanForm = {
         //     self.enableBtn(self.btnCreatePost);
         // });
     },
+
+    setTime: () => {
+        let now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        return now.toISOString().slice(0,19).replace('T', ' ');
+    },
     
     applyPost: async (e) => {
         let self = PojanForm;
@@ -103,16 +149,20 @@ let PojanForm = {
         let formData = new FormData(self.applyPostForm);
 
         // Create time stamp
-        let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        formData.append('created_at', date);
-        formData.append('updated_at', date);
+        formData.append('created_at', self.setTime());
+        formData.append('updated_at', self.setTime());
 
         // Post form data
-        self.requests('/posts/create', formData,  null)
+        self.requests('/posts/apply/create', formData,  null)
         .then( response => {
 
             if (response.ok ) {
                 return response.json();
+            }
+
+            console.log(response);
+            if( response.status === 500 ){
+                throw new Error('Please make sure your file meets the requirements.');
             }
         
             throw new Error(response.statusText);
@@ -127,20 +177,19 @@ let PojanForm = {
             
             // Display the success toast and redirect to signin page after 5 secs
             self.displayToast(result.message)
-            .then( () => {
+            .then( (response ) => {
                 self.applyPostForm.reset();
-                window.location = '/posts';
+                window.location = result.redirectTo;
             });
 
         }).catch( error => {
-
             // Throw error
             self.formError.classList.add('show');
             self.formError.textContent = error.message;
 
         }).finally(() => {
             self.loader(false, self.applyPostForm);
-            self.enableBtn(self.btnCreatePost);
+            self.enableBtn(self.btnApplyPost);
         });
     },
 
@@ -159,9 +208,8 @@ let PojanForm = {
         let formData = new FormData(self.createPostForm);
 
         // Create time stamp
-        let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        formData.append('created_at', date);
-        formData.append('updated_at', date);
+        formData.append('created_at', self.setTime());
+        formData.append('updated_at', self.setTime());
 
         // Post form data
         self.requests('/posts/create', formData,  null)
@@ -185,7 +233,7 @@ let PojanForm = {
             self.displayToast(result.message)
             .then( () => {
                 self.createPostForm.reset();
-                window.location = '/posts';
+                // window.location = '/posts';
             });
 
         }).catch( error => {
@@ -264,9 +312,8 @@ let PojanForm = {
         let formData = new FormData(self.signUpForm);
 
         // Create time stamp
-        let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        formData.append('created_at', date);
-        formData.append('updated_at', date);
+        formData.append('created_at', self.setTime());
+        formData.append('updated_at', self.setTime());
 
         // Remove the extra password data
         formData.delete('confirm_password');

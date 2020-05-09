@@ -35,7 +35,7 @@ helpers.initials = (str) => {
 // Validate email
 helpers.validateEmail = async (email) => {
     return await new Promise((resolve, reject) => {
-        if( email.search(/[a-zA-Z]+(@)(nmsu)+[.][a-zA-z]+(|[.])[a-zA-Z]+/g) >= 0 ){
+        if( email.search(/[a-zA-Z]+(@)(nmsu)+[.](edu)+/g) >= 0 ){
             resolve(email)
         } else {
             reject('Invalid NMSU email address');
@@ -44,12 +44,15 @@ helpers.validateEmail = async (email) => {
 };
 
 // Format date
-helpers.formatDate = (rows)=>{
-    rows.forEach(row=>{
-          let ISOdate= new Date(row.created_at);
-          ISOdate.setHours(ISOdate.getHours()-6);
-          row.created_at= moment(ISOdate).fromNow();
-    })
+helpers.formatTime = (rows)=>{
+    if(rows.length>0){
+            rows.forEach(row=>{
+            row.created_at= moment(new Date(row.created_at)).fromNow();
+      })
+    }
+    else {
+        rows.created_at= moment(new Date(rows.created_at)).fromNow();
+    }
     return rows;
 }
 
