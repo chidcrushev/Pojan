@@ -172,7 +172,7 @@ main form.uses-loader{
 }
 
 form.uses-loader:after{
-    z-index: 10000;
+    z-index: 500;
     content: '';
     display: block;
     position: absolute;
@@ -186,7 +186,7 @@ form.uses-loader:after{
 
 .loader{
     display: none;
-    z-index: 10000;
+    z-index: 1000;
     position: absolute;
     top: calc(60% - 50px);
     left: calc(56% - 50px);

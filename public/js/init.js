@@ -38,6 +38,9 @@
   let tooltip = document.querySelectorAll('.tooltipped');
   let tooltip_instance = M.Tooltip.init(tooltip, {});
 
+  let characterCounter = document.querySelector('#message');
+  M.CharacterCounter.init(characterCounter);
+
   let referrer = document.referrer;
 
   /* 

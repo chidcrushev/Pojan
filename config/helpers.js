@@ -34,7 +34,7 @@ helpers.initials = (str) => {
 // Validate email
 helpers.validateEmail = async (email) => {
     return await new Promise((resolve, reject) => {
-        if( email.search(/[a-zA-Z]+(@)(nmsu)+[.][a-zA-z]+(|[.])[a-zA-Z]+/g) >= 0 ){
+        if( email.search(/[a-zA-Z]+(@)(nmsu)+[.](edu)+/g) >= 0 ){
             resolve(email)
         } else {
             reject('Invalid NMSU email address');

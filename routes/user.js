@@ -3,6 +3,8 @@ const Router    = express.Router();
 const db  = require('../config/database-config');
 const auth = require('../auth/middleware/auth-middleware');
 
+
+
 // Render user profile page
 Router.get('/profile', auth.isLoggedIn, (req, res, next) => {
     

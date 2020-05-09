@@ -123,19 +123,23 @@
         <div class="row">
             <form class="col s12" class="" action="/signup" id="profileForm" method="POST" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="input-field col s6">
-                        <input id="first_name" type="text" name="firstname" value="{{info.firstname}}">
-                        <label for="first_name">First Name</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate" name="lastname" value="{{info.lastname}}">
-                        <label for="last_name">Last Name</label>
+                    <div class="col s12">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" name="firstname" value="{{info.firstname}}">
+                            <label for="first_name">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate" name="lastname" value="{{info.lastname}}">
+                            <label for="last_name">Last Name</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input disabled value="{{info.email}}" id="disabled" type="email">
-                        <label for="disabled">Email</label>
+                    <div class="col s12">
+                        <div class="input-field col s12">
+                            <input disabled value="{{info.email}}" id="disabled" type="email">
+                            <label for="disabled">Email</label>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
