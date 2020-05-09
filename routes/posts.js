@@ -5,6 +5,7 @@ const multer    = require('multer');
 const upload    = multer();
 const helpers   = require('../config/helpers');
 const auth = require('../auth/middleware/auth-middleware');
+const moment    = require('moment');
 
 // Custom MySql Errors
 let sqlErrors = {'1062': {'title': 'Duplicate Entry', 'message': 'Email already exists. Please try again with a different email.'}};
@@ -42,10 +43,11 @@ Router.get('/', auth.isLoggedIn, async (req, res, next) => {
         GROUP BY post.post_id
         ORDER BY post.updated_at DESC
     `).then((rows) => {
+        let result = helpers.formatDate(rows);
         res.render('posts/', {
             navBarEnabled: true,
             pageTitle: 'posts',
-            response: rows,
+            response: result,
             info: req.user,
             // error: (typeof result === 'function') ? result(data => req.flash(data)) : false
         });

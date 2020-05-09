@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const moment = require('moment');
 
 // Container for all the helpers
 let helpers = {};
@@ -41,6 +42,16 @@ helpers.validateEmail = async (email) => {
         }
     });
 };
+
+// Format date
+helpers.formatDate = (rows)=>{
+    rows.forEach(row=>{
+          let ISOdate= new Date(row.created_at);
+          ISOdate.setHours(ISOdate.getHours()-6);
+          row.created_at= moment(ISOdate).fromNow();
+    })
+    return rows;
+}
 
 // Export the module
 module.exports = helpers;
