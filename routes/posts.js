@@ -273,6 +273,12 @@ Router.post('/create', upload.none(), auth.isLoggedIn, async (req, res, next) =>
 
     // get the id of the user who posted the job
     let user_id = await (req.session.passport.user) ? req.session.passport.user.id : false;
+    
+    //Pass the department for email and sms notification system
+    let dept_name = postData['department'];
+    let push    = postData['push'];
+    let email   = postData['email'];
+    let sms     = postData['sms'];
 
     // Cleanup the json object
     // Delete non required fields
@@ -300,19 +306,22 @@ Router.post('/create', upload.none(), auth.isLoggedIn, async (req, res, next) =>
     .then(async  ( response , error ) => {
         // Get selected notifications: sms, push, email
         // use await and async here 
-        if( postData.email !== '' ){
+        if (email !== undefined) {
             console.log('Sending email');
             // send email to registered users
-            let emailID = await db.dbQuery('SELECT email from user WHERE isStudent= true').catch( error => console.log(error));
-            notification.email(emailID);
+            let emailID = await db.dbQuery('SELECT email from user WHERE isStudent= true').catch(error => console.log(error));
+            if (emailID.length > 0) {
+                notification.email(emailID, dept_name);
+            }
         }
-        if( postData.sms !== '' ){
+        if (sms !== undefined) {
             // send sms to registered users
-            console.log('Sending sms');
-            
+            let phoneNo = await db.dbQuery('SELECT phone from user WHERE isStudent= true and phone IS NOT NULL').catch(error => console.log(error));
+            if (phoneNo.length > 0) {
+                notification.sms(phoneNo, dept_name);
+            }
         }
-        
-        if( postData.push !== ''){
+        if( push !== undefined){
             // send sms to registered users
             console.log('Sending push');
         }
