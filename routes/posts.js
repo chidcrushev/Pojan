@@ -7,6 +7,8 @@ const helpers   = require('../config/helpers');
 const auth = require('../auth/middleware/auth-middleware');
 const moment    = require('moment');
 const upload    = multer();
+const notification = require('../config/notification')
+const nodemailer = require('nodemailer');
 
 const fileupload   = multer({
     dest: 'uploads/',
@@ -246,16 +248,19 @@ Router.post('/create', upload.none(), auth.isLoggedIn, async (req, res, next) =>
 
     // Insert data into db
     await db.dbQuery('INSERT INTO post SET ?', postData)
-    .then( ( response ) => {
+    .then(async  ( response , error ) => {
         // Get selected notifications: sms, push, email
         // use await and async here 
         if( postData.email !== '' ){
-            // send email to registered users
             console.log('Sending email');
+            // send email to registered users
+            let emailID = await db.dbQuery('SELECT email from user WHERE isStudent= true').catch( error => console.log(error));
+            notification.email(emailID);
         }
         if( postData.sms !== '' ){
             // send sms to registered users
             console.log('Sending sms');
+            
         }
         
         if( postData.push !== ''){
