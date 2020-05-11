@@ -5,7 +5,8 @@ const connection = mysql.createConnection({
     host: "localhost",
     user: "root", 
     password: "",
-    database: "project"
+    database: "project",
+    multipleStatements: true
 });
 
 // Check if connection is successsful
@@ -13,7 +14,7 @@ connection.connect((err) => {
     if (!err) {
         console.log('Successfully connected to MYSQL DB');
     } else {
-        console.error('Failed to connect to MYSQL DB');
+        console.error('Failed to connect to MYSQL DB \nPlease make sure you provided your mysql password');
     }
 });
 

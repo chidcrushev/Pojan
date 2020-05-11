@@ -6,7 +6,7 @@ Router.get('/', (req, res) => {
 
     //Prevent the user from vising the login page
     if(req.isAuthenticated()){
-        return res.redirect('posts');
+        return res.redirect('posts/page');
     }
 
     res.render('signin', {

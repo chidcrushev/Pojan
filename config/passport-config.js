@@ -22,7 +22,6 @@ passport.use('signin', new LocalStrategy ({
     // session: false
 }, (request, email, password, done) => {
 
-    console.log(email);
         db.query('SELECT * FROM user where email = ?', [email.trim()], (error, rows, fields) => {
 
             if (rows.length > 0) {

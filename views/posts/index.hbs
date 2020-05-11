@@ -21,8 +21,8 @@
                 </p>
               </div>
               <div class="card-action">              
-                <span class="tooltipped" data-position="bottom" data-tooltip="{{this.NOSOFAPPLICANTS}} applicants"><i class="material-icons">group</i> {{ this.NOSOFAPPLICANTS }} </span>
-                <span class="tooltipped" data-position="bottom" data-tooltip="24 views"><i class="material-icons">visibility</i> 24</span>
+                <span class="tooltipped" data-position="bottom" data-tooltip="{{ this.NOSOFAPPLICANTS }} {{#if (gt this.NOSOFAPPLICANTS 1)}} applicants {{else}} applicant {{/if}} "><i class="material-icons">group</i> {{ this.NOSOFAPPLICANTS }} </span>
+                <span class="tooltipped" data-position="bottom" data-tooltip="{{ this.NOSOFVIEWS }} {{#if (gt this.NOSOFVIEWS 1)}} views {{else}} view {{/if}}"><i class="material-icons">visibility</i> {{this.NOSOFVIEWS}}</span>
                 <a href="/posts/apply/{{this.post_id}}" class="btn btn-small right pink darken-3 waves-effect">Apply</a>
               </div>
             </div>
@@ -45,6 +45,7 @@
     
     {{!-- Load pagination links --}}
     {{> posts/pagination}}
+    
   </div>
 </main>
 

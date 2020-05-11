@@ -161,8 +161,13 @@ main form.uses-loader{
     position: relative;
 }
 
+#profileLoaderElem{
+    display: none;
+}
+
+.profile-error,
 .form-error{
-    background-color: #e53935 ;
+    background-color: #e53935;
     color: #ffffff;
     padding: 10px;
     font-weight: 500;
@@ -171,6 +176,7 @@ main form.uses-loader{
     display: none;
 }
 
+div.uses-loader:after,
 form.uses-loader:after{
     z-index: 500;
     content: '';

@@ -8,6 +8,8 @@ const auth = require('../auth/middleware/auth-middleware');
 const moment    = require('moment');
 const upload    = multer();
 
+
+
 const fileupload   = multer({
     dest: 'uploads/',
     fileFilter: (req, file, next) => {
@@ -27,37 +29,54 @@ const fileupload   = multer({
     },
 });
 
-Router.get('/fetch/:postid', async (req, res, next) => {
+Router.get('/fetch/:postid',  auth.isLoggedIn, async (req, res, next) => {
 
     // Get the post id
     let post_id = req.params.postid;
+    let user_id = req.session.passport.user.id;
 
     // Fetch the post id
     await db.dbQuery(
-        `SELECT
-        COUNT(p.fk_post_id) as NOSOFAPPLICANTS,
-        post.post_id, post.post_title, post.description, post.requirement, post.status, post.created_at, post.updated_at,
-        user.user_id, user.firstname, user.lastname, user.email,
-        requisite.requisite_title,
-        assistantship.assistantship_title,
-        department.dept_name
-        
-        FROM post
-        
-        INNER JOIN project.user ON user.user_id = post.fk_user_id
-        INNER JOIN department ON department.dept_id = post.fk_dept_id
-        INNER JOIN assistantship ON assistantship.assistantship_id = post.fk_assistantship_id
-        INNER JOIN requisite ON requisite.requisite_id = post.fk_requisite_id 
-        LEFT  JOIN  post_applicant p ON p.fk_post_id = post.post_id
-        WHERE post.post_id = ?
-        GROUP BY post.post_id
-        ORDER BY post.updated_at DESC`, [post_id]
+        `SELECT 
+        COUNT(view.fk_post_id) as NOSOFVIEWS,
+        p.*
+        FROM post_view as view
+        RIGHT JOIN
+                (SELECT
+                COUNT(applicant.fk_post_id) as NOSOFAPPLICANTS,
+                post.post_id as post_id, 
+                post.post_title, 
+                post.description, 
+                post.requirement, 
+                post.status, 
+                post.created_at, 
+                post.updated_at,
+                user.user_id, 
+                user.firstname, 
+                user.lastname, 
+                user.email,
+                requisite.requisite_title,
+                assistantship.assistantship_title,
+                department.dept_name
+                
+                FROM post
+                
+                INNER JOIN project.user ON user.user_id = post.fk_user_id
+                INNER JOIN department ON department.dept_id = post.fk_dept_id
+                INNER JOIN assistantship ON assistantship.assistantship_id = post.fk_assistantship_id
+                INNER JOIN requisite ON requisite.requisite_id = post.fk_requisite_id 
+                LEFT  JOIN  post_applicant applicant ON applicant.fk_post_id = post.post_id
+                WHERE post.post_id = ?
+                GROUP BY post.post_id
+                ORDER BY post.created_at DESC) as p ON view.fk_post_id = p.post_id GROUP BY p.post_id;
+                
+                INSERT INTO post_view (fk_user_id, fk_post_id) VALUES (? , ?)`, [post_id, user_id, post_id]
     ).then((rows) => {
         res.render('modal', {
             layout: false,
             navBarEnabled: true,
             pageTitle: 'posts',
-            response: helpers.formatTime(rows[0]),
+            response: helpers.formatTime(rows[0][0]),
             info: req.user,
             applyUrl: '/posts/apply/'+post_id
         });
@@ -66,50 +85,76 @@ Router.get('/fetch/:postid', async (req, res, next) => {
     });
 });
 
+Router.get('/page/:page?/', auth.isLoggedIn, async (req, res, next) => {
+    // Import pagination class
+    Pagination = require('../model/Pagination');
+    // Get current page from url (request parameter)
+    let page_id = parseInt(req.params.page) || 1
+    let currentPage = page_id > 0 ? page_id : currentPage;
 
-// Render posts page
-Router.get('/', auth.isLoggedIn, async (req, res, next) => {
-    await db.dbQuery(
-        `SELECT
-        COUNT(p.fk_post_id) as NOSOFAPPLICANTS,
-        post.post_id, post.post_title, post.description, post.requirement, post.status, post.created_at, post.updated_at,
-        user.user_id, user.firstname, user.lastname, user.email,
-        requisite.requisite_title,
-        assistantship.assistantship_title,
-        department.dept_name
+    //Change pageUri to your page url without the 'page' query string 
+    pageUri = '/posts/page/';
+
+    /*Get total items*/
+    db.query('SELECT COUNT(post_id) as totalCount FROM post',(err, rows, field) => {
+
+        // Display 10 items per page
+        const perPage = 5,
+            totalCount = rows[0].totalCount;
+
+        // Instantiate Pagination class
+        const Paginate = new Pagination(totalCount, currentPage, pageUri, perPage);
+
+        /*Query items*/
+        db.query(`SELECT 
+        COUNT(view.fk_post_id) as NOSOFVIEWS,
+        p.*
+        FROM post_view as view
+        RIGHT JOIN
+                (SELECT
+                COUNT(applicant.fk_post_id) as NOSOFAPPLICANTS,
+                post.post_id as post_id, 
+                post.post_title, 
+                post.description, 
+                post.requirement, 
+                post.status, 
+                post.created_at, 
+                post.updated_at,
+                user.user_id, 
+                user.firstname, 
+                user.lastname, 
+                user.email,
+                requisite.requisite_title,
+                assistantship.assistantship_title,
+                department.dept_name
+                
+                FROM post
+                
+                INNER JOIN project.user ON user.user_id = post.fk_user_id
+                INNER JOIN department ON department.dept_id = post.fk_dept_id
+                INNER JOIN assistantship ON assistantship.assistantship_id = post.fk_assistantship_id
+                INNER JOIN requisite ON requisite.requisite_id = post.fk_requisite_id 
+                LEFT  JOIN  post_applicant applicant ON applicant.fk_post_id = post.post_id
+                GROUP BY post.post_id
+                ORDER BY post.created_at DESC) as p ON view.fk_post_id = p.post_id GROUP BY p.post_id
         
-        FROM post
-        
-        INNER JOIN project.user ON user.user_id = post.fk_user_id
-        INNER JOIN department ON department.dept_id = post.fk_dept_id
-        INNER JOIN assistantship ON assistantship.assistantship_id = post.fk_assistantship_id
-        INNER JOIN requisite ON requisite.requisite_id = post.fk_requisite_id 
-        LEFT  JOIN  post_applicant p ON p.fk_post_id = post.post_id
-        
-        GROUP BY post.post_id
-        ORDER BY post.created_at DESC
-    `).then((rows) => {
-        let result = helpers.formatTime(rows);
-        res.render('posts/', {
-            navBarEnabled: true,
-            pageTitle: 'posts',
-            response: result,
-            info: req.user,
-            // error: (typeof result === 'function') ? result(data => req.flash(data)) : false
+                LIMIT ${Paginate.perPage} 
+                OFFSET ${Paginate.offset}`,
+        (err, rows, field)=>{
+
+            // Send data to view
+            res.render('posts/', {
+                navBarEnabled: true,
+                pageTitle: 'posts',
+                response: helpers.formatTime(rows),
+                info: req.user,
+                pages : Paginate.links()
+                // error: (typeof result === 'function') ? result(data => req.flash(data)) : false
+            });
         });
-    }).catch((error) => {
-        next(error);
     });
 });
 
-// Render posts page
-Router.get('/', auth.isLoggedIn, (req, res, next) => {
-    res.render('posts/',{
-        navBarEnabled: true,
-        pageTitle: 'posts',
-        info : req.user
-    });
-});
 
 // Render posts creation page
 Router.get('/create', auth.isLoggedIn, auth.isAdmin, (req, res, next) => {
@@ -143,6 +188,7 @@ Router.get('/apply/:postid', auth.isLoggedIn, async (req, res, next) => {
 });
 
 // Render posts application page
+// @TODO Faculty members can't apply for a job. Only students
 Router.post('/apply/create', fileupload.single('resume'), auth.isLoggedIn, async (req, res, next) => {
 
     let postData = req.body;
@@ -190,7 +236,7 @@ Router.post('/apply/create', fileupload.single('resume'), auth.isLoggedIn, async
                         console.log('Sending email to ', postedBy[0].email);
                     }
 
-                    res.status(200).json({message: 'Thank you. Your application has been sent.', redirectTo: '/posts'});
+                    res.status(200).json({message: 'Thank you. Your application has been sent.', redirectTo: '/posts/page'});
                 }).catch( ( error ) => {
                     res.statusMessage = error;
                     res.status(400).send();
@@ -199,18 +245,16 @@ Router.post('/apply/create', fileupload.single('resume'), auth.isLoggedIn, async
             }
         }
     }).catch((error) => {
+        
         res.statusMessage = error;
-            res.status(400).send();
-            return false;
+        res.status(400).send();
+        return false;
     }); 
 });
 
 
 /* @TODO 
     - Send notification via email, sms and push
-    - Get from tables, userid(user in session), deptid, assistantshipid, requisiteid,
-    - check for these ids to make sure they match
-    - insert into posts table
     - on successful insertion, broadcast the notifications
 */
 Router.post('/create', upload.none(), auth.isLoggedIn, async (req, res, next) => {
@@ -236,6 +280,11 @@ Router.post('/create', upload.none(), auth.isLoggedIn, async (req, res, next) =>
     delete postData['push'];
     delete postData['email'];
     delete postData['sms'];
+
+    // Filter entries
+    postData.post_title = helpers.ucFirst(postData.post_title).trim();
+    postData.description = helpers.ucFirst(postData.description).trim();
+    postData.requirement = helpers.ucFirst(postData.requirement).trim();
  
     // Append required table fields and values
     postData.fk_user_id = user_id,
