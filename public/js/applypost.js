@@ -1,5 +1,3 @@
-
-
 let applyPostForm = document.getElementById('applyPostForm');
 
 // Initialize signup form    

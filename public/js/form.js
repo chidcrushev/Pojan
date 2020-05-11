@@ -7,11 +7,16 @@ let PojanForm = {
         self.createPostForm = config.createPostForm;
         self.applyPostForm = config.applyPostForm;
         self.profileForm = config.profileForm;
-
+        self.profileLoader = config.profileLoader;
+        self.profileLoaderElem = config.profileLoaderElem;
+        
         self.elemFetchPost = config.fetchPostId;
+        self.elemEditProfile = config.elemEditProfile;
+        self.elemProfileImg = config.elemProfileImg;
 
         self.loaderElem = document.getElementById('loader');
         self.formError = document.getElementById('formError');
+        self.profileError = document.getElementById('profileError');
 
         self.btnSignUp = document.getElementById("btnSignUp");
         self.btnSignIn = document.getElementById("btnSignIn");
@@ -23,13 +28,79 @@ let PojanForm = {
         self.signUpForm ? self.signUpForm.addEventListener('submit', self.applySignUp) : false;  
         self.createPostForm ? self.createPostForm.addEventListener('submit', self.applyCreatePostForm) : false;  
         self.applyPostForm ? self.applyPostForm.addEventListener('submit', self.applyPost) : false;  
-        self.profileForm ? self.profileForm.addEventListener('submit', self.applyProfile) : false;  
 
+        self.btnProfile ? self.btnProfile.addEventListener('click', self.applyProfile) : false;  
+        
+        // Loop thorugh all post triggers and listen for click event
         if( self.elemFetchPost ) {
             self.elemFetchPost.forEach(element => {
                 element.addEventListener('click', self.fetchPostData.bind(event, element));
             });
         }
+
+        // Loop through all profile images and listen for click events
+        if( self.elemProfileImg ) {
+            self.elemProfileImg.forEach(element => {
+                element.addEventListener('click', self.updateProfileImage.bind(event, element));
+            });
+        }
+    },
+
+    updateProfileImage: (elem, e) => {
+
+        let self = PojanForm;
+
+        e.preventDefault();
+
+        // Show loader
+        self.profileLoaderElem.style.display = 'block';
+        self.profileLoader.classList.add('uses-loader');
+
+        let getImagePath = elem.getAttribute('src');
+
+        let formData = new FormData();
+
+        formData.append("avatar", getImagePath);
+
+        // Request content for related post id
+        fetch('/user/profile/update/image/', {
+            method: 'PUT',
+            body: formData
+        }).then((response) => {
+            if (response.ok) {
+                // Return raw html
+                return response.json();
+            }
+        }).then((result) => {
+            
+            // Disable the div error element if it is visible 
+            if( self.profileError.classList === 'show'){
+                self.profileError.classList.remove('show');
+                self.profileError.classList.add('hide');
+                self.profileError.textContent = '';
+            }
+
+            // Display the success toast and redirect to signin page after 5 secs
+            self.delay(1000).then(() => {
+                self.displayToast(result.message)
+                .then(() => {
+                    document.querySelector('.profile-avatar').setAttribute('src', getImagePath);
+                    document.querySelector('.nav-avatar').setAttribute('src', getImagePath);
+                });
+            });
+            
+        }).catch( error => {
+            // Throw error
+            self.profileError.classList.add('show');
+            self.profileError.textContent = error;
+
+        }).finally(() => {
+            self.delay(1000).then(() => {
+                self.profileLoaderElem.style.display = 'none';
+                self.profileLoader.classList.remove('uses-loader');
+            });
+            
+        });
     },
 
     fetchPostData: ( elem, e ) => {
@@ -52,7 +123,6 @@ let PojanForm = {
             }
         }).then((result) => {
             let modal = document.getElementById('modal1');
-            
             let instance = M.Modal.getInstance(modal);
             
             // Render html template to the modal window
@@ -60,16 +130,12 @@ let PojanForm = {
                 modal.innerHTML = result;
             }
         }).catch( error => {
-            alert('Could not etch requested content. Please try again!');
-        }).finally(() => {
-
+            alert('Could not fetch requested content. Please try again!');
         });
     },
-
+    
     applyProfile: async (e) => {
         let self = PojanForm;
-
-        // console.log('Form fired Fired');
 
         e.preventDefault();
         
@@ -79,51 +145,50 @@ let PojanForm = {
         // Show loader
         self.loader(true, self.profileForm);
 
-        console.log('hello');
-
         // Get form data
-        // let formData = new FormData(self.createPostForm);
+        let formData = new FormData(self.profileForm);
 
-        // // Create time stamp
-        // let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        // formData.append('created_at', date);
-        // formData.append('updated_at', date);
+        // Update time stamp
+        formData.append('updated_at', self.setTime());
 
         // Post form data
-        // self.requests('/posts/create', formData,  null)
-        // .then( response => {
+        fetch('/user/profile/update/', {
+            method: 'PUT',
+            body: formData
 
-        //     if (response.ok ) {
-        //         return response.json();
-        //     }
+        }).then( response => {
+
+            if (response.ok ) {
+                return response.json();
+            }
         
-        //     throw new Error(response.statusText);
+            throw new Error(response.statusText);
 
-        // }).then( result => {
+        }).then( result => {
             
-        //     // Disable the div error element if it is visible 
-        //     if( self.formError){
-        //         self.formError.classList.add('hide');
-        //         self.formError.textContent = '';
-        //     }
+            // Disable the div error element if it is visible 
+            if( self.formError){
+                self.formError.classList.add('hide');
+                self.formError.textContent = '';
+            }
             
-        //     // Display the success toast and redirect to signin page after 5 secs
-        //     self.displayToast(result.message)
-        //     .then( () => {
-        //         self.createPostForm.reset();
-        //         window.location = '/posts';
-        //     });
+            // Display the success toast and redirect to signin page after 5 secs
+            self.displayToast(result.message)
+            .then( () => {
+                self.profileForm.reset();
+                window.location = '/user/profile';
+            });
 
-        // }).catch( error => {
+        }).catch( error => {
 
-        //     // Throw error
-        //     self.formError.classList.add('show');
-        //     self.formError.textContent = error.message;
+            // Throw error
+            self.formError.classList.add('show');
+            self.formError.textContent = error.message;
 
-        // }).finally(() => {
-        //     self.loader(false, self.createPostForm);
-        //     self.enableBtn(self.btnCreatePost);
-        // });
+        }).finally(() => {
+            self.loader(false, self.profileForm);
+            self.enableBtn(self.btnProfile);
+        });
     },
 
     setTime: () => {
@@ -134,8 +199,6 @@ let PojanForm = {
     
     applyPost: async (e) => {
         let self = PojanForm;
-
-        // console.log('Form fired Fired');
 
         e.preventDefault();
         
@@ -160,7 +223,6 @@ let PojanForm = {
                 return response.json();
             }
 
-            console.log(response);
             if( response.status === 500 ){
                 throw new Error('Please make sure your file meets the requirements.');
             }
@@ -233,7 +295,7 @@ let PojanForm = {
             self.displayToast(result.message)
             .then( () => {
                 self.createPostForm.reset();
-                // window.location = '/posts';
+                window.location = '/posts/create';
             });
 
         }).catch( error => {
@@ -283,7 +345,7 @@ let PojanForm = {
             self.displayToast(result.message)
             .then( () => {
                 self.signInForm.reset();
-                window.location = '/posts';
+                window.location = '/posts/page';
             });
 
         }).catch( error => {
@@ -368,6 +430,7 @@ let PojanForm = {
     loader: ( bool, form ) => {
         let self = PojanForm;
         if(bool){
+            
             self.loaderElem.style.display = 'block';
             form.classList.add('uses-loader');
         } else {
@@ -380,9 +443,9 @@ let PojanForm = {
         return await M.toast({
             html: message, 
             classes: 'rounded',
-            completeCallback: async () => {
-                await M.toast({html: 'Redirecting you to sign in page'});
-            }
+            // completeCallback: async () => {
+            //     await M.toast({html: 'Redirecting you'});
+            // }
         });
     },
 

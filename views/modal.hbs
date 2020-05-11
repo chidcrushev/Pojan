@@ -1,19 +1,8 @@
-<div class="preloader-wrapper active loader" id="loader">
-    <div class="spinner-layer spinner-red-only">
-      <div class="circle-clipper left">
-        <div class="circle"></div>
-      </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-        <div class="circle"></div>
-      </div>
-    </div>
-  </div>
   <div class="modal-content">
     <a href="#" class="modal-close  right"><i class="material-icons">close</i></a>
     <h4>{{response.post_title}}</h4>
     <ul class="card-breadcrumb">
-      <li><i class="material-icons green-text accent-4 ">lens</i><span></span></li>
+      <li><i class="material-icons {{#if (eq response.status 1)}} green-text {{else}} red-text {{/if}} accent-4 ">lens</i><span>{{#if (eq response.status 1)}} Active {{else}} Inactive {{/if}}</span></li>
       <li><span>{{response.assistantship_title:}}</span></li>
       <li><span class="tooltipped" data-position="top" data-tooltip="{{response.requisite_title}}">{{response.requisite_title}}</span></li>
       <li><i class="material-icons">access_time</i><span>{{response.created_at}}</span></li>
@@ -50,12 +39,12 @@
       <div class="row">
         <div class="chip">
           <i class="material-icons">group</i>
-          {{response.NOSOFAPPLICANTS}} applicants
+          {{ response.NOSOFAPPLICANTS }} {{#if (gt response.NOSOFAPPLICANTS 1)}} applicants {{else}} applicant {{/if}}
         </div>
         
         <div class="chip">
           <i class="material-icons">visibility</i>
-          9 views
+          {{ response.NOSOFVIEWS }} {{#if (gt response.NOSOFVIEWS 1)}} views {{else}} view {{/if}}
         </div>
       </div>
     </div>

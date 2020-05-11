@@ -13,7 +13,7 @@ connection.connect((err) => {
     if (!err) {
         console.log('Successfully connected to MYSQL DB');
     } else {
-        console.error('Failed to connect to MYSQL DB');
+        console.error('Failed to connect to MYSQL DB \nPlease make sure you provided your mysql password');
     }
 });
 

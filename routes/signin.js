@@ -8,7 +8,7 @@ const upload    = multer();
 Router.get('/', (req, res) => {
     
     if(req.isAuthenticated()){
-        return res.redirect('posts');
+        return res.redirect('/posts/page/');
     }
 
     res.render('signin',{
