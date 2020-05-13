@@ -4,7 +4,7 @@
     <div class="container section">
         <form id="applyPostForm" method="POST" enctype="multipart/form-data">
          <input type="hidden" name="fk_post_id" value="{{ post.post_id }}">
-         <input type="hidden" name="fk_user_id" value="{{ post.post_id }}">
+         <input type="hidden" name="fk_user_id" value="{{ info.user_id }}">
             <div class="row">
                 <div class="col s12">
                     <h5>{{ post.post_title }}</h5>

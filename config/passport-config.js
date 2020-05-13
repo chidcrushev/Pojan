@@ -9,12 +9,12 @@ passport.serializeUser( (user, done) => {
 });
 
 passport.deserializeUser(function (user, done) {
- 
     db.query('SELECT * FROM user where user_id = ?', [user.id], (error, rows, fields) => {
         done(null,rows[0]);
     });
 });
 
+// Handle user sign in
 passport.use('signin', new LocalStrategy ({
     usernameField: 'email',
     passwordField: 'password',

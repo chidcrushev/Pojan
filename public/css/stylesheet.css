@@ -198,6 +198,10 @@ form.uses-loader:after{
     left: calc(56% - 50px);
 }
 
+#profileLoaderElem{
+    z-index: 1000;
+}
+
 .hide{ display: none; }
 .show{ display: block; }
 
@@ -214,7 +218,7 @@ form.uses-loader:after{
     font-size: 1.5rem;
 }
 
-input[type=email]:focus,input[type=password]:focus,input[type=text]:focus,textarea:focus {
+input[type=email]:focus,input[type=number]:focus,input[type=password]:focus,input[type=text]:focus,textarea:focus {
  border-bottom: 1px solid #ad1457  !important;
  box-shadow: 0 1px 0 0 #ad1457  !important;
 }
@@ -239,6 +243,10 @@ input[type=email]:focus,input[type=password]:focus,input[type=text]:focus,textar
 
 input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser-default):focus:not([readonly]) + label, input[type="password"]:not(.browser-default):focus:not([readonly]) + label, input[type="email"]:not(.browser-default):focus:not([readonly]) + label, input[type="url"]:not(.browser-default):focus:not([readonly]) + label, input[type="time"]:not(.browser-default):focus:not([readonly]) + label, input[type="date"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime-local"]:not(.browser-default):focus:not([readonly]) + label, input[type="tel"]:not(.browser-default):focus:not([readonly]) + label, input[type="number"]:not(.browser-default):focus:not([readonly]) + label, input[type="search"]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
     color: #ad1457;
+}
+
+.input-field .helper-text{
+    font-size: 14px;
 }
 
 .dropdown-content li>a, .dropdown-content li>span {
@@ -286,6 +294,14 @@ input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser
 
 .profile-avatars{
     width:100%;
+    border-radius: 50%;
+    transition: all .2s ease-in-out;
+}
+
+.profile-avatars:hover{
+    border-radius: 0%;
+    bottom: 2px;
+    transform: scale(1.1);
 }
 
 .profile-title{
