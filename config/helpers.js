@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const moment = require('moment');
 
 // Container for all the helpers
 let helpers = {};
@@ -12,6 +13,48 @@ helpers.hash = (str) => {
         return false;
     }
 };
+
+// Capitalize the first character of a ward
+helpers.ucFirst = (word) => {
+    if (typeof word !== 'string') return ''
+    return word.charAt(0).toUpperCase() + word.slice(1)
+};
+
+// Get initials 
+helpers.initials = (str) => {
+    let result = '';
+    let split = str.split(' ');
+    
+    split.forEach( str => {
+        result += str.charAt(0);
+    });
+
+    return result;
+};
+
+// Validate email
+helpers.validateEmail = async (email) => {
+    return await new Promise((resolve, reject) => {
+        if( email.search(/[a-zA-Z]+(@)(nmsu)+[.](edu)+/g) >= 0 ){
+            resolve(email)
+        } else {
+            reject('Invalid NMSU email address');
+        }
+    });
+};
+
+// Format date
+helpers.formatTime = (rows)=>{
+    if(rows.length>0){
+            rows.forEach(row=>{
+            row.created_at= moment(new Date(row.created_at)).fromNow();
+      })
+    }
+    else {
+        rows.created_at= moment(new Date(rows.created_at)).fromNow();
+    }
+    return rows;
+}
 
 // Export the module
 module.exports = helpers;
