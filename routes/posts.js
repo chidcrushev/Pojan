@@ -1,15 +1,15 @@
-const path   = require('path');
+// Load dependencies
 const express   = require('express');
 const Router    = express.Router();
 const db        = require('../config/database-config');
 const multer    = require('multer');
 const helpers   = require('../config/helpers');
 const auth = require('../auth/middleware/auth-middleware');
-const moment    = require('moment');
 const upload    = multer();
+const notification = require('../config/notification');
 
 
-
+// Multer file upload configuration
 const fileupload   = multer({
     dest: 'uploads/',
     fileFilter: (req, file, next) => {
@@ -29,6 +29,7 @@ const fileupload   = multer({
     },
 });
 
+// Route to fetch selected post and display on the modal
 Router.get('/fetch/:postid',  auth.isLoggedIn, async (req, res, next) => {
 
     // Get the post id
@@ -85,12 +86,13 @@ Router.get('/fetch/:postid',  auth.isLoggedIn, async (req, res, next) => {
     });
 });
 
+// Route to display paginated posts
 Router.get('/page/:page?/', auth.isLoggedIn, async (req, res, next) => {
     // Import pagination class
     Pagination = require('../model/Pagination');
     // Get current page from url (request parameter)
-    let page_id = parseInt(req.params.page) || 1
-    let currentPage = page_id > 0 ? page_id : currentPage;
+    page_id = parseInt(req.params.page) || 1;
+    let curPage = page_id > 0 ? page_id : currentPage;
 
     //Change pageUri to your page url without the 'page' query string 
     pageUri = '/posts/page/';
@@ -103,7 +105,7 @@ Router.get('/page/:page?/', auth.isLoggedIn, async (req, res, next) => {
             totalCount = rows[0].totalCount;
 
         // Instantiate Pagination class
-        const Paginate = new Pagination(totalCount, currentPage, pageUri, perPage);
+        const Paginate = new Pagination(totalCount, curPage, pageUri, perPage);
 
         /*Query items*/
         db.query(`SELECT 
@@ -135,9 +137,8 @@ Router.get('/page/:page?/', auth.isLoggedIn, async (req, res, next) => {
                 INNER JOIN assistantship ON assistantship.assistantship_id = post.fk_assistantship_id
                 INNER JOIN requisite ON requisite.requisite_id = post.fk_requisite_id 
                 LEFT  JOIN  post_applicant applicant ON applicant.fk_post_id = post.post_id
-                GROUP BY post.post_id
-                ORDER BY post.created_at DESC) as p ON view.fk_post_id = p.post_id GROUP BY p.post_id
-        
+                GROUP BY post.post_id) as p ON view.fk_post_id = p.post_id GROUP BY p.post_id
+                ORDER BY p.created_at DESC
                 LIMIT ${Paginate.perPage} 
                 OFFSET ${Paginate.offset}`,
         (err, rows, field)=>{
@@ -188,7 +189,6 @@ Router.get('/apply/:postid', auth.isLoggedIn, async (req, res, next) => {
 });
 
 // Render posts application page
-// @TODO Faculty members can't apply for a job. Only students
 Router.post('/apply/create', fileupload.single('resume'), auth.isLoggedIn, async (req, res, next) => {
 
     let postData = req.body;
@@ -233,7 +233,7 @@ Router.post('/apply/create', fileupload.single('resume'), auth.isLoggedIn, async
                 db.dbQuery('INSERT INTO post_applicant SET ?', postData)
                 .then( ( response ) => {
                     if( postData.email !== '' ){
-                        console.log('Sending email to ', postedBy[0].email);
+                        // console.log('Sending email to ', postedBy[0].email);
                     }
 
                     res.status(200).json({message: 'Thank you. Your application has been sent.', redirectTo: '/posts/page'});
@@ -253,10 +253,7 @@ Router.post('/apply/create', fileupload.single('resume'), auth.isLoggedIn, async
 });
 
 
-/* @TODO 
-    - Send notification via email, sms and push
-    - on successful insertion, broadcast the notifications
-*/
+// Route to create posts
 Router.post('/create', upload.none(), auth.isLoggedIn, async (req, res, next) => {
     let postData = req.body;
 
@@ -265,21 +262,26 @@ Router.post('/create', upload.none(), auth.isLoggedIn, async (req, res, next) =>
 
     // Fetch the requisite_id of the selected requisite type
     let get_requisite_id = await db.dbQuery('SELECT requisite_id FROM requisite WHERE requisite_title = ?', postData.requisite).catch( error => console.log(error));
-                                
+                               
     // Fetch the assistantship_id of the selected assistanship type
     let assistantship_id = Number(postData.assistantship);
 
     // get the id of the user who posted the job
     let user_id = await (req.session.passport.user) ? req.session.passport.user.id : false;
+    //Pass the department for email and sms notification system
+    let dept_name = postData.department;
+    let push    = postData.push;
+    let email   = postData.email;
+    let sms     = postData.sms;
 
     // Cleanup the json object
     // Delete non required fields
-    delete postData['requisite'];
-    delete postData['assistantship'];
-    delete postData['department'];
-    delete postData['push'];
-    delete postData['email'];
-    delete postData['sms'];
+    delete postData.requisite;
+    delete postData.assistantship;
+    delete postData.department;
+    delete postData.push;
+    delete postData.email;
+    delete postData.sms;
 
     // Filter entries
     postData.post_title = helpers.ucFirst(postData.post_title).trim();
@@ -287,27 +289,32 @@ Router.post('/create', upload.none(), auth.isLoggedIn, async (req, res, next) =>
     postData.requirement = helpers.ucFirst(postData.requirement).trim();
  
     // Append required table fields and values
-    postData.fk_user_id = user_id,
-    postData.status = 1,
-    postData.fk_dept_id = get_dept_id[0].dept_id,
-    postData.fk_assistantship_id = assistantship_id,
+    postData.fk_user_id = user_id;
+    postData.status = 1;
+    postData.fk_dept_id = get_dept_id[0].dept_id;
+    postData.fk_assistantship_id = assistantship_id;
     postData.fk_requisite_id = get_requisite_id[0].requisite_id;
 
     // Insert data into db
     await db.dbQuery('INSERT INTO post SET ?', postData)
-    .then( ( response ) => {
+    .then(async ( response, error ) => {
         // Get selected notifications: sms, push, email
         // use await and async here 
-        if( postData.email !== '' ){
+        if (email !== undefined) {
             // send email to registered users
-            console.log('Sending email');
+            let emailID = await db.dbQuery('SELECT email from user WHERE isStudent= true').catch(error => console.log(error));
+            if (emailID.length > 0) {
+                notification.email(emailID, dept_name);
+            }
         }
-        if( postData.sms !== '' ){
+        if (sms !== undefined) {
             // send sms to registered users
-            console.log('Sending sms');
+            let phoneNo = await db.dbQuery('SELECT phone from user WHERE isStudent= true and phone IS NOT NULL').catch(error => console.log(error));
+            if (phoneNo.length > 0) {
+                notification.sms(phoneNo, dept_name);
+            }
         }
-        
-        if( postData.push !== ''){
+        if( push !== undefined){
             // send sms to registered users
             console.log('Sending push');
         }

@@ -1,5 +1,7 @@
+// Handle post page pagination
 class Pagination{
 
+    // Pagination constructor
 constructor(totalCount,currentPage,pageUri,perPage=2){
     this.perPage = perPage;
     this.totalCount =parseInt(totalCount);
@@ -14,7 +16,7 @@ constructor(totalCount,currentPage,pageUri,perPage=2){
 }
 
 
-
+// Pagination links
 links(){
     this.pages='<ul class="pagination">';
 
