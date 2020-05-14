@@ -27,3 +27,4 @@ npm install
 ```
 npm start
 ```
+![](https://github.com/chidcrushev/Pojan/blob/master/pojan.gif)
