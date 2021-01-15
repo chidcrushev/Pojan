@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/chidcrushev/finalProject#readme",
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "connect-flash": "^0.1.1",
     "consolidate": "^0.15.1",
     "cookie-parser": "^1.4.5",
