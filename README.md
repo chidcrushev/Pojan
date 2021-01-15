@@ -15,6 +15,7 @@ This repository is created for the team project to build a Web based Research/Gr
     <li> express-handlebars</li>
     <li> passport</li>
     <li> MomentJs</li>
+    <li> Multer </li>
 </ol>
 
 ## Installation Guide
