@@ -5,23 +5,28 @@ const multer    = require('multer');
 const upload    = multer();
 const helpers   = require('../config/helpers');
 
-// Custom MySql Errors
+/**
+ * Custom MySql Errors
+ */
 let sqlErrors = {'1062': {'title': 'Duplicate Entry', 'message': 'Email already exists. Please try again with a different email.'}};
 
-// Render sign up page
+/**
+ * Render sign up page
+ */
 Router.get('/', (req, res, next) => {
 
-        //Prevent the user from vising the login page
-        if(req.isAuthenticated()){
-            return res.redirect('posts/page');
-        }
+    // Prevent the user from vising the login page
+    if(req.isAuthenticated())
+        return res.redirect('posts/page');
 
     res.render('signup', {
         pageTitle: 'Sign Up'
     });
 });
 
-// Handle sign up request
+/**
+ * Handle sign up request
+ */
 Router.post('/', upload.none(), async (req, res, next) => {
 
     // Get the post data
@@ -35,7 +40,7 @@ Router.post('/', upload.none(), async (req, res, next) => {
         postData.firstname  = helpers.ucFirst(postData.firstname).trim();
         postData.lastname   = helpers.ucFirst(postData.lastname).trim();
         postData.password   = postData.password.trim();
-        postData.avatar     = `/img/profile/avatars/${Math.floor(Math.random() * 5) + 1}.jpg`
+        postData.avatar     = `/img/profile/avatars/${Math.floor(Math.random() * 5) + 1}.jpg`;
         postData.email      = email.trim();
 
         // Convert the isStudent data type implicitly

@@ -1,4 +1,8 @@
-let PojanForm = {
+const PojanForm = {
+    /**
+     * Initialize form attributes
+     * @param {*} config 
+     */
     init: ( config ) => {
         let self = PojanForm;
 
@@ -46,6 +50,11 @@ let PojanForm = {
         }
     },
 
+    /**
+     * Profile image update handler
+     * @param {*} elem 
+     * @param {*} e 
+     */
     updateProfileImage: (elem, e) => {
 
         let self = PojanForm;
@@ -103,6 +112,11 @@ let PojanForm = {
         });
     },
 
+    /**
+     * Fetch request handler
+     * @param {*} elem 
+     * @param {*} e 
+     */
     fetchPostData: ( elem, e ) => {
 
         e.preventDefault();
@@ -134,6 +148,10 @@ let PojanForm = {
         });
     },
     
+    /**
+     * Profile update handler
+     * @param {*} e 
+     */
     applyProfile: async (e) => {
         let self = PojanForm;
 
@@ -197,6 +215,10 @@ let PojanForm = {
         return now.toISOString().slice(0,19).replace('T', ' ');
     },
     
+    /**
+     * Job application handler
+     * @param {*} e 
+     */
     applyPost: async (e) => {
         let self = PojanForm;
 
@@ -255,6 +277,10 @@ let PojanForm = {
         });
     },
 
+    /**
+     * Job creation handler
+     * @param {*} e 
+     */
     applyCreatePostForm: async (e) => {
         let self = PojanForm;
 
@@ -310,6 +336,10 @@ let PojanForm = {
         });
     },
 
+    /**
+     * Application Signin Handler
+     * @param {*} e 
+     */
     applySignIn: async ( e ) => {
         let self = PojanForm;
         e.preventDefault();
@@ -360,6 +390,10 @@ let PojanForm = {
         });
     },
     
+    /**
+     * Application sigup handler
+     * @param {*} e 
+     */
     applySignUp: async ( e ) => {
         let self = PojanForm;
         e.preventDefault();
@@ -419,18 +453,30 @@ let PojanForm = {
         });
     },
 
+    /**
+     * Diasble a button element
+     * @param {*} e 
+     */
     disableBtn: ( e ) => {
         e.setAttribute('disabled', 'disabled');
     },
     
+    /**
+     * Enable a button element
+     * @param {*} e 
+     */
     enableBtn: ( e ) => {
         e.removeAttribute('disabled');
     },
    
+    /**
+     * Hide/Display loader
+     * @param {*} bool 
+     * @param {*} form 
+     */
     loader: ( bool, form ) => {
         let self = PojanForm;
         if(bool){
-            
             self.loaderElem.style.display = 'block';
             form.classList.add('uses-loader');
         } else {
@@ -439,16 +485,25 @@ let PojanForm = {
         }
     },
 
+    /**
+     * Taost display handler
+     * @param {*} message 
+     * @returns 
+     */
     displayToast: async (message) => {
         return await M.toast({
             html: message, 
-            classes: 'rounded',
+            classes: 'rounded green darken-1',
+            
             // completeCallback: async () => {
             //     await M.toast({html: 'Redirecting you'});
             // }
         });
     },
 
+    /**
+     * Delay handler
+     */
     delay: (ms) => {
         return new Promise( (resolve, reject) => {
             setTimeout(() => resolve(ms), ms);
@@ -456,6 +511,13 @@ let PojanForm = {
     },
 
 
+    /**
+     * Post requests handler
+     * @param {*} url 
+     * @param {*} formData 
+     * @param {*} formDataString 
+     * @returns 
+     */
     requests: async (url, formData, formDataString) => {
 
         let requestParams = {};

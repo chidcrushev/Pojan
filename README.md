@@ -1,5 +1,6 @@
 # POJAN
-This repository is created for the team project to build a Web based Research/Graduate/Teaching assistantship job application portal for CS 579- web programming course
+This repository is created for the team project to build a Web based Research/Graduate/Teaching assistantship job application portal.
+
 
 ## Authors
 [Valentine Aduaka](https://github.com/sabival89) , [Chidambaram Crushev](https://github.com/chidcrushev)
