@@ -53,7 +53,6 @@ passport.use('signin', new LocalStrategy ({
  * @returns 
  */
 const comparePassword = (rows, password) => {
-
     if (rows.length > 0) {
         const hashedPassword = rows[0].password;
         
