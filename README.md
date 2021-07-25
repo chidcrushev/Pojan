@@ -1,20 +1,22 @@
 # POJAN
 This repository is created for the team project to build a Web based Research/Graduate/Teaching assistantship job application portal.
 
+
 ## Authors
 [Valentine Aduaka](https://github.com/sabival89) , [Chidambaram Crushev](https://github.com/chidcrushev)
 
 <h2>Technology Stack</h2>
 <ol>
-    <li> HTML5</li>
-    <li> CSS3</li>
-    <li> JavaScript</li>
-    <li> Material.io</li>
+    <li> HTML/CSS3/Javascript</li>
     <li> Socket.io</li>
     <li> Express</li>
     <li> MySQL</li>
     <li> Node js</li>
     <li> Twilio Messaging API</li>
+    <li> express-handlebars</li>
+    <li> passport</li>
+    <li> MomentJs</li>
+    <li> Multer </li>
 </ol>
 
 ## Installation Guide
@@ -27,3 +29,4 @@ npm install
 ```
 npm start
 ```
+![](https://github.com/chidcrushev/Pojan/blob/master/pojan.gif)
