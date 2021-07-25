@@ -8,15 +8,12 @@ const path        = require('path');
 const app         = express();
 const exphbs      = require('express-handlebars');
 const http        = require('http').createServer(app);
-const session     = require('express-session'); // used
 const bodyParser = require('body-parser'); // used
 const passport   = require('./config/passport-config');
-const cookieParser= require('cookie-parser');
 const routes      = require('./routes/routes'); // used
 const port        = process.env.PORT || 3000; // used
 const flash         = require('connect-flash');
 const helpers        = require('./config/helpers');
-const authentication        = require('./auth/middleware/auth-middleware');
 
 // Handlebars engine setup
 const hbs = exphbs.create({
@@ -47,7 +44,6 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 // Passport Middleware config
-// app.use(express.static("public"));
 app.use(require('express-session')({ 
     secret: 'secret', 
     resave: false, 
@@ -73,10 +69,9 @@ app.use('/*', (req, res, next) =>{
 
 // Register all application routes
 app.use('/', routes);
-// app.use(authentication);
 
 // Start the server 
 http.listen(port, () => console.log(`Server is listening on port ${port}`));   
 
 //Exports the module
-// module.exports = app;
+module.exports = app;

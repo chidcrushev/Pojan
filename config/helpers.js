@@ -44,9 +44,11 @@ helpers.validateSchoolEmail = async (email) => {
 };
 
 helpers.validateEmail = async (email) => {
-    const regExp = new ReqExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, i);
+    /* jshint ignore:start */
+    const regExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i;
+    /* jshint ignore:end */
     return await new Promise((resolve, reject) => {
-        if(regExp.test(email)){
+        if(email.match(regExp)){
             resolve(email);
         } else {
             reject('Invalid NMSU email address');

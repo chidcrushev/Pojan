@@ -30,7 +30,6 @@ body.has-fixed-sidenav{
     }
 }
 
-
 .bg-template{
     background-image: linear-gradient(rgba(139, 0, 46, 0.685), rgba(172, 3, 40, 0.719)), url(../img/learning.jpg);
     background-size: contain;
@@ -241,7 +240,19 @@ input[type=email]:focus,input[type=number]:focus,input[type=password]:focus,inpu
     border-bottom: 2px solid #ad1457;
 }
 
-input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser-default):focus:not([readonly]) + label, input[type="password"]:not(.browser-default):focus:not([readonly]) + label, input[type="email"]:not(.browser-default):focus:not([readonly]) + label, input[type="url"]:not(.browser-default):focus:not([readonly]) + label, input[type="time"]:not(.browser-default):focus:not([readonly]) + label, input[type="date"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime"]:not(.browser-default):focus:not([readonly]) + label, input[type="datetime-local"]:not(.browser-default):focus:not([readonly]) + label, input[type="tel"]:not(.browser-default):focus:not([readonly]) + label, input[type="number"]:not(.browser-default):focus:not([readonly]) + label, input[type="search"]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+input:not([type]):focus:not([readonly]) + label, 
+input[type="text"]:not(.browser-default):focus:not([readonly]) + label, 
+input[type="password"]:not(.browser-default):focus:not([readonly]) + label, 
+input[type="email"]:not(.browser-default):focus:not([readonly]) + label, 
+input[type="url"]:not(.browser-default):focus:not([readonly]) + label, 
+input[type="time"]:not(.browser-default):focus:not([readonly]) + label, 
+input[type="date"]:not(.browser-default):focus:not([readonly]) + label, 
+input[type="datetime"]:not(.browser-default):focus:not([readonly]) + label, 
+input[type="datetime-local"]:not(.browser-default):focus:not([readonly]) + label, 
+input[type="tel"]:not(.browser-default):focus:not([readonly]) + label, 
+input[type="number"]:not(.browser-default):focus:not([readonly]) + label,
+input[type="search"]:not(.browser-default):focus:not([readonly]) + label, 
+textarea.materialize-textarea:focus:not([readonly]) + label {
     color: #ad1457;
 }
 
@@ -270,6 +281,13 @@ input:not([type]):focus:not([readonly]) + label, input[type="text"]:not(.browser
 
 .sidenav .user-view .background img{
     width: 200%;
+}
+
+li.disabled a,
+li.disabled:hover a{
+    color: #c5c5c5;
+    background-color: #e9e9e9;
+    cursor: not-allowed;
 }
 
 .modal.bottom-sheet {
