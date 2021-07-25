@@ -16,8 +16,8 @@ helpers.hash = (str) => {
 
 // Capitalize the first character of a ward
 helpers.ucFirst = (word) => {
-    if (typeof word !== 'string') return ''
-    return word.charAt(0).toUpperCase() + word.slice(1)
+    if (typeof word !== 'string') return '';
+    return word.charAt(0).toUpperCase() + word.slice(1);
 };
 
 // Get initials 
@@ -33,10 +33,21 @@ helpers.initials = (str) => {
 };
 
 // Validate email
-helpers.validateEmail = async (email) => {
+helpers.validateSchoolEmail = async (email) => {
     return await new Promise((resolve, reject) => {
         if( email.search(/[a-zA-Z]+(@)(nmsu)+[.](edu)+/g) >= 0 ){
-            resolve(email)
+            resolve(email);
+        } else {
+            reject('Invalid NMSU email address');
+        }
+    });
+};
+
+helpers.validateEmail = async (email) => {
+    const regExp = new ReqExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, i);
+    return await new Promise((resolve, reject) => {
+        if(regExp.test(email)){
+            resolve(email);
         } else {
             reject('Invalid NMSU email address');
         }
@@ -48,13 +59,13 @@ helpers.formatTime = (rows)=>{
     if(rows.length>0){
             rows.forEach(row=>{
             row.created_at= moment(new Date(row.created_at)).fromNow();
-      })
+      });
     }
     else {
         rows.created_at= moment(new Date(rows.created_at)).fromNow();
     }
     return rows;
-}
+};
 
 // Export the module
 module.exports = helpers;

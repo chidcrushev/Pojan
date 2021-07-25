@@ -1,6 +1,9 @@
 const mysql = require('mysql');
 
-// Database connection
+
+/**
+ * DB Connection Setup
+ */
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root", 
@@ -9,7 +12,9 @@ const connection = mysql.createConnection({
     multipleStatements: true
 });
 
-// Check if connection is successsful
+/**
+ * Connect to database
+ */
 connection.connect((err) => {
     if (!err) {
         console.log('Successfully connected to MYSQL DB');
@@ -18,7 +23,9 @@ connection.connect((err) => {
     }
 });
 
-// Generic db query
+/**
+ * DB Query setup
+ */
 connection.dbQuery = async ( query, val = null) => {
     return await new Promise((resolve, reject) => {
         connection.query( query, val, (err, rows, fields) => {                                              
